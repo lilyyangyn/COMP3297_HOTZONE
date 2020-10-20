@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}HotZone{% endblock %}
+
+{% block content %}
+{{ block.super }}
+<div class="page-header col-xs-12 col-lg-12" style="margin-top:30px">
+	<h1>{% block index_header %}{% endblock %}</h1>
+	<br><br>
+</div>
+<div class="col-xs-12 col-lg-12">
+	{% block index_content %}{% endblock %}
+</div>
+{% endblock %}
