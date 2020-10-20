@@ -33,7 +33,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'records.apps.RecordsConfig',
-    "bootstrap4",
+    'customauth.apps.CustomauthConfig',
+    'bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -91,6 +92,8 @@ DATABASES = {
     }
 }
 
+# customized user model
+AUTH_USER_MODEL = 'customauth.Staff'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
