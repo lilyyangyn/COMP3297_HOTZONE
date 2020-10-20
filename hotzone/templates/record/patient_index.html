@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}Hot Zone | Patients{% endblock %}
+
+{% block content %}
+<div class="page-header col-xs-12 col-lg-12">
+	<h1>Patients</h1>
+</div>
+<div class="col-xs-12 col-lg-12">
+	<h3>Total Patients: <span style="color:red;">{{ patient_list.all | length }}</span></h3>
+	<br>
+
+	<table class="table text-center">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Identity #</th>
+				<th>Date of Birth</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{% for patient in patient_list %}
+			<tr>
+				<td>{{ patient.name }}</td>
+				<td>{{ patient.identity }}</td>
+				<td>{{ patient.birth }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+{% endblock %}

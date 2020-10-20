@@ -1,0 +1,55 @@
+<header class="navbar navbar-static-top navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+
+    	<div class="navbar-header">
+    		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="navbar-collapse collapse pull-right">
+        	<ul class="nav navbar-nav">
+
+        		<li class="dropdown">
+        			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        				Records <b class="caret"></b>
+        			</a>
+        			<ul class="dropdown-menu" role="menu">
+                        <li><a href="{% url 'patients' %}">Patients</a></li>
+                        <li>Viruses</li>
+        				<li>Locations</li>
+                        <li>Cases</li>
+                        <li>Visits</li>
+        			</ul>
+        		</li>
+
+                {% if current_user.can_moderate %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Clustering <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>New Clustering</li>
+                        <hr>
+                        <li>Clusters</li>
+                    </ul>
+                </li>
+                {% endif %}
+
+        		{% if current_user.is_authenticated %}
+        		<li class="dropdown">
+        			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        				 {{ current_user.name }} <b class="caret"></b>
+        			</a>
+        		</li>
+        		{% else %}
+        		<li><span class="glyphicon glyphicon-log-in"></span>&nbspLogin</a></li>
+        		{% endif %}
+            </ul>
+        </div>
+
+    </div>
+</header>
