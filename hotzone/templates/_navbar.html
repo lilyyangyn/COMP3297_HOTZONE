@@ -1,55 +1,48 @@
-<header class="navbar navbar-static-top navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="container-fluid">
+<header class="navbar navbar-static-top navbar-inverse navbar-fixed-top navbar-expand-lg" role="navigation">
 
-    	<div class="navbar-header">
-    		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
+    <i class="navbar-brand" style="color:grey">HotZone</i>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="navbar-collapse collapse pull-right">
-        	<ul class="nav navbar-nav">
+    <div class="navbar-collapse collapse" id="navbarSupportedContent">
+    	<ul class="navbar-nav ml-auto">
 
-        		<li class="dropdown">
-        			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        				Records <b class="caret"></b>
-        			</a>
-        			<ul class="dropdown-menu" role="menu">
-                        <li><a href="{% url 'records:patients' %}">Patients</a></li>
-                        <li>Viruses</li>
-        				<li>Locations</li>
-                        <li>Cases</li>
-                        <li>Visits</li>
-        			</ul>
-        		</li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
 
-                {% if current_user.can_moderate %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        Clustering <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>New Clustering</li>
-                        <hr>
-                        <li>Clusters</li>
-                    </ul>
-                </li>
-                {% endif %}
 
-        		{% if current_user.is_authenticated %}
-        		<li class="dropdown">
-        			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        				 {{ current_user.name }} <b class="caret"></b>
-        			</a>
-        		</li>
-        		{% else %}
-        		<li><span class="glyphicon glyphicon-log-in"></span>&nbspLogin</a></li>
-        		{% endif %}
-            </ul>
-        </div>
+    		<li class="nav-item dropdown">
+    			<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Records</a>
+    			<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li class="dropdown-item"><a href="{% url 'records:patients' %}">Patients</a></li>
+                    <li class="dropdown-item">Viruses</li>
+    				<li class="dropdown-item">Locations</li>
+                    <div class="dropdown-divider"></div>
+                    <li class="dropdown-item">Cases</li>
+                    <li class="dropdown-item">Visits</li>
+    			</ul>
+    		</li>
 
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clustering</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li class="dropdown-item">New Clustering</li>
+                    <div class="dropdown-divider"></div>
+                    <li class="dropdown-item">Clusters</li>
+                </ul>
+            </li>
+
+    		{% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'customauth:logout' %}"><i class="fa fa-sign-out" aria-hidden="true">&nbspLogout</i></a>
+            </li>
+    		{% else %}
+    		<li>
+                <a class="nav-link" href="{% url 'customauth:login' %}"><i class="fa fa-sign-in" aria-hidden="true">&nbspLogin</i></a>
+            </li>
+    		{% endif %}
+        </ul>
     </div>
 </header>
