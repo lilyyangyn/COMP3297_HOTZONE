@@ -1,12 +1,16 @@
 {% extends 'bootstrap4/bootstrap4.html' %}
 
 {% load bootstrap4 %}
+{% load static %}
 
 {% block bootstrap4_title %}
 {% block title %}Hot Zone{% endblock %}
 {% endblock %}
 
-
+{% block bootstrap4_extra_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/base_styles.css' %}?ver=1">
+{% endblock %}
 
 {% block bootstrap4_content %}
 
@@ -15,7 +19,22 @@
 {% endblock %}
 
 {% block content %}
+	{% if messages %}
+		{% for msg in messages %}
+			{% if msg.tags == "error" %}
+			<div class="alert alert-danger alert-dismissable">
+			{% else %}
+		    <div class="alert alert-{{ msg.tags }} alert-dismissable">
+		    {% endif %}
+		      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		      {{ msg.message }} 
+		    </div>
+	  {% endfor %}
+	{% endif %}
+{% endblock %}
 
+{% block bootstrap4_extra_script %}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 {% endblock %}
 
 {% endblock %}
