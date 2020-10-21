@@ -8,6 +8,56 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.urls import reverse
 
+class CustomizedCreateView(CreateView):
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super().dispatch(*args, **kwargs)
+
+	def form_valid(self, form):
+		instance = form.save()
+		self.kwargs['id'] = instance.pk
+
+		messages.success(self.request, self.success_notice)
+		return HttpResponseRedirect(self.get_success_url())
+
+	def form_invalid(self, form):
+		messages.error(self.request, self.error)
+		return super().form_invalid(form)
+
+class CustomizedEditView(UpdateView):
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super().dispatch(*args, **kwargs)
+
+	def get_object(self, queryset=None):
+		return get_object_or_404(self.model, pk=self.kwargs['id'])
+
+	def form_valid(self, form):
+		if form.has_changed():
+			instance = form.save()
+			messages.success(self.request, self.success_notice_changed)
+		else:
+			messages.info(self.request, self.success_notice_unchanged)
+
+		return HttpResponseRedirect(self.get_success_url())
+
+	def form_invalid(self, form):
+		messages.error(self.request, self.error_notice)
+		return super().form_invalid(form)
+
+class CustomizedDeleteView(DeleteView):
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super().dispatch(*args, **kwargs)
+
+	def get_object(self, queryset=None):
+		return get_object_or_404(self.model, pk=self.kwargs['id'])
+
+	def get(self, *args, **kwargs):
+		return self.post(*args, **kwargs)
+
+
+
 class PatientAllView(ListView):
 	template_name = "record/patient_index.html"
 	model = Patient
@@ -21,64 +71,31 @@ class PatientShowView(TemplateView):
 		context['patient'] = patient
 		return context
 
-class PatientCreateView(CreateView):
+class PatientCreateView(CustomizedCreateView):
 	template_name = "record/patient_new.html"
 	model = Patient
 	fields = '__all__'
-	
-	@method_decorator(login_required)
-	def dispatch(self, *args, **kwargs):
-		return super().dispatch(*args, **kwargs)
+	success_notice = 'Data saved. Creation successfully.'
+	error_notice = 'Something is wrong. Creation fails.'
 
-	def form_valid(self, form):
-		patient = form.save()
-		messages.success(self.request, 'Data saved. Creation successfully.')
-	
-		return HttpResponseRedirect(reverse('records:patient-show', kwargs={'id':patient.pk}))
+	def get_success_url(self):
+		return reverse('records:patient-show', kwargs={'id': self.kwargs['id']})
 
-	def form_invalid(self, form):
-		messages.error(self.request, 'Something is wrong. Creation fails.')
-		return super().form_invalid(form)
-
-class PatientEditView(UpdateView):
+class PatientEditView(CustomizedEditView):
 	template_name = "record/patient_edit.html"
 	model = Patient
 	fields = '__all__'
+	success_notice_changed = 'Data saved. Edit successfully.'
+	success_notice_unchanged = 'Data saved. Nothing has changed'
+	error_notice = 'Something is wrong. Edition fails.'
 
-	@method_decorator(login_required)
-	def dispatch(self, *args, **kwargs):
-		return super().dispatch(*args, **kwargs)
+	def get_success_url(self):
+		return reverse('records:patient-show', kwargs={'id':self.get_object().pk})
 
-	def get_object(self, queryset=None):
-		return get_object_or_404(self.model, pk=self.kwargs['id'])
-
-	def form_valid(self, form):
-		if form.has_changed():
-			patient = form.save()
-			messages.success(self.request, 'Data saved. Edit successfully.')
-		else:
-			messages.info(self.request, 'Data saved. Nothing has changed')
-		return HttpResponseRedirect(reverse('records:patient-show', kwargs={'id':self.get_object().pk}))
-
-	def form_invalid(self, form):
-		messages.error(self.request, 'Something is wrong. Edition fails.')
-		return super().form_invalid(form)
-
-class PatientDeleteView(DeleteView):
+class PatientDeleteView(CustomizedDeleteView):
 	success_message = 'Delete Successfully.'
 	model = Patient
 
-	@method_decorator(login_required)
-	def dispatch(self, *args, **kwargs):
-		return super().dispatch(*args, **kwargs)
-
-	def get_object(self, queryset=None):
-		return get_object_or_404(self.model, pk=self.kwargs['id'])
-
 	def get_success_url(self):
 		return reverse('records:patients')
-	
-	def get(self, *args, **kwargs):
-		return self.post(*args, **kwargs)
-
 
