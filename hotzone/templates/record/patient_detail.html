@@ -20,3 +20,4 @@
 {% endblock %}
 
 {% block detail_back_url %}{% url 'records:patients' %}{% endblock %}
+{% block detail_edit_url %}{% url 'records:patient-edit' patient.pk %}{% endblock %}

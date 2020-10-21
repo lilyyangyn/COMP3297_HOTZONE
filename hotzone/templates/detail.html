@@ -14,8 +14,12 @@
 					{% block detail_table_content %}{% endblock %}
 					</tbody>
 				</table>
-				<div class="controls">
-					<button type="button" class="btn btn-lg btn-danger btn-block" onclick="location.href='{% block detail_back_url %}{% endblock %}'">Back</button>
+				<div class="text-center">
+					<div class="controls" style="display:inline">
+						<button type="button" class="btn btn-lg btn-info mr-auto" style="width:45%" onclick="location.href='{% block detail_edit_url %}{% endblock %}'">Edit</button>
+						&nbsp&nbsp
+						<button type="button" class="btn btn-lg btn-danger ml-auto" style="width:45%" onclick="location.href='{% block detail_back_url %}{% endblock %}'">Menu</button>
+					</div>
 				</div>
 			</div>	
 		</div>

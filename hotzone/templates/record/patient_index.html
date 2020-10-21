@@ -14,6 +14,7 @@
 			<th>Name</th>
 			<th>Identity #</th>
 			<th>Date of Birth</th>
+			<th>Operations</th>
 		</tr>
 	</thead>
 
@@ -23,6 +24,13 @@
 			<td>{{ patient.name }}</td>
 			<td>{{ patient.identity }}</td>
 			<td>{{ patient.birth }}</td>
+			<td>
+				<a href="{% url 'records:patient-detail' patient.pk %}">Details&nbsp<i class="fa fa-address-book-o" aria-hidden="true"></i></a>
+				&nbsp|&nbsp
+				<a href="{% url 'records:patient-edit' patient.pk %}">Edit&nbsp<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+				&nbsp|&nbsp
+				<a href="{% url 'records:patient-delete' patient.pk %}">Delete&nbsp<i class="fa fa-times" aria-hidden="true"></i></a>
+			</td>
 		</tr>
 		{% endfor %}
 	</tbody>
