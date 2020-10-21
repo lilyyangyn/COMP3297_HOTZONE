@@ -9,4 +9,8 @@
 <div class="col-xs-12 col-lg-12">
 	{% block index_content %}{% endblock %}
 </div>
+
+<div class="control" style="position:fixed;bottom:40px;right:50px;">
+	<button type="button" class="btn btn-lg btn-danger btn-block"style="width:120%" onclick="location.href='{% block new_record_url %}{% endblock %}'">New</button>
+</div>
 {% endblock %}
