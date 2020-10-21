@@ -1,0 +1,46 @@
+{% extends 'form.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Edit Patient | HotZone{% endblock %}
+
+{% block form_card_title %}Edit Patient{% endblock %}
+
+{% block form_card_body %}
+<div class="input-group" style="margin-bottom: 25px">
+  <div class="input-group-prepend">
+    <span class="input-group-text"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
+  </div>
+	{{ form.name | add_class:"form-control" }}
+
+  {% if form.name.errors %}
+  <div class="form-validate_error">{{ form.name.errors }}</div>
+  {% endif %}
+</div>
+
+<div class="input-group" style="margin-bottom: 25px">
+  <div class="input-group-prepend">
+    <span class="input-group-text"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+  </div>
+	{{ form.identity | add_class:"form-control" }}
+
+  {% if form.identity.errors %}
+  <div class="form-validate_error">{{ form.identity.errors }}</div>
+  {% endif %}
+</div>
+
+<div class="input-group" style="margin-bottom: 25px">
+  <div class="input-group-prepend">
+    <span class="input-group-text"><i class="fa fa-birthday-cake" aria-hidden="true"></i></span>
+  </div>
+	{{ form.birth | add_class:"form-control" }}
+
+  {% if form.birth.errors %}
+  <div class="form-validate_error">{{ form.birth.errors }}</div>
+  {% endif %}
+</div>
+
+<div class="controls">
+  <input class="btn btn-danger btn-block" type="submit" value="Save" />
+</div>
+{% endblock %}

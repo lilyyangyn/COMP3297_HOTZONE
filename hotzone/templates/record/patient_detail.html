@@ -1,0 +1,22 @@
+{% extends 'detail.html' %}
+
+{% block title %}Patient Detail | HotZone{% endblock %}
+
+{% block detail_card_title %}Patient Detail{% endblock %}
+
+{% block detail_table_content %}
+<tr>
+	<td>Name</td>
+	<td>{{ patient.name }}</td>
+</tr>
+<tr>
+	<td>Identity Document Number</td>
+	<td>{{ patient.identity }}</td>
+</tr>
+<tr>
+	<td>Date of Birth</td>
+	<td>{{ patient.birth }}</td>
+</tr>
+{% endblock %}
+
+{% block detail_back_url %}{% url 'records:patients' %}{% endblock %}

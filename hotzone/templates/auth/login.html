@@ -1,6 +1,5 @@
 {% extends 'form.html' %}
 
-{% load static %}
 {% load widget_tweaks %}
 
 {% block title %}Login | HotZone{% endblock %}
@@ -8,21 +7,18 @@
 {% block form_card_title %}Wellcome to HotZone{% endblock %}
 
 {% block form_card_body %}
-<div style="margin-bottom: 25px">
-  <div class="input-group">
-    <div class="input-group-prepend">
-      <span class="input-group-text"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
-    </div>
-  	{{ form.username | add_class:"form-control" }}
+<div class="input-group" style="margin-bottom: 25px">
+  <div class="input-group-prepend">
+    <span class="input-group-text"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
+  </div>
+	{{ form.username | add_class:"form-control" }}
 
-    {% if form.username.errors %}
-    <div class="form-validate_error">{{ form.username.errors }}</div>
-    {% endif %}
- 	</div>
-  
+  {% if form.username.errors %}
+  <div class="form-validate_error">{{ form.username.errors }}</div>
+  {% endif %}
 </div>
 
-<div class="input-group">
+<div class="input-group" style="margin-bottom: 25px">
   <div class="input-group-prepend">
     <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></span>
   </div>
@@ -33,19 +29,17 @@
   {% endif %}
 </div>
 
-<div class="input-group col-xs-12 col-lg-12">
-	<div style="float:left; margin-top: 0.8em">
+<div class="input-group" style="margin-bottom: 25px;">
+	<div class="mr-auto" style="float:left;margin-left: 10px">
 		{{ form.remember_me }}
      <span style="font-size: 14px;font-weight: normal;">Remember Me</span>
   </div>
-  <div style="float:right; margin-top: 0.8em;">
-    <span style="font-size: 14px;font-weight: normal">&nbsp&nbsp|&nbsp&nbspForget Password</span>
+  <div class="ml-auto" style="float:right;margin-right: 10px">
+    <span style="font-size: 14px;font-weight: normal">Forget Password</span>
   </div>
 </div>
 
-<div style="margin-top:10px">
-	<div class="col-xs-12 controls">
-    <input class="btn btn-danger btn-block" type="submit" value="Login" />
-  </div>
+<div class="controls">
+  <input class="btn btn-danger btn-block" type="submit" value="Login" />
 </div>
 {% endblock %}

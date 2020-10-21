@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ block.super }}
+<div class="container" style="margin-bottom: 50px;">
+	<div style="margin-top:50px;" >
+		<div class="card card-info" style="margin:0 auto; width:75%;">
+			<div class="card-heading text-center" >
+				<div class="card-title" style="margin-top: 50px;"><h3>{% block detail_card_title %}{% endblock %}</h3></div>
+			</div>
+			<div style="padding-top:30px;" class="card-body" >
+				<table class="table text-center">
+					<tbody style="font-size:18px;font-weight:bold;">
+					{% block detail_table_content %}{% endblock %}
+					</tbody>
+				</table>
+				<div class="controls">
+					<button type="button" class="btn btn-lg btn-danger btn-block" onclick="location.href='{% block detail_back_url %}{% endblock %}'">Back</button>
+				</div>
+			</div>	
+		</div>
+	</div>
+</div>
+
+{% endblock %}

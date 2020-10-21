@@ -17,7 +17,7 @@ class LoginView(FormView):
 	@method_decorator(csrf_protect)
 	@method_decorator(never_cache)
 	def dispatch(self, *args, **kwargs):
-		return super(LoginView, self).dispatch(*args, **kwargs)
+		return super().dispatch(*args, **kwargs)
 
 	def form_valid(self, form):
 		login(self.request, form.get_user())
@@ -26,6 +26,7 @@ class LoginView(FormView):
 		if not remember_me:
 			self.request.session.set_expiry(0)
 
+		messages.success(self.request, 'Login successfully.')
 		return HttpResponseRedirect(self.get_success_url())
 
 	def get_success_url(self):
@@ -46,10 +47,9 @@ class LoginView(FormView):
 		form_class = self.get_form_class()
 		form = self.get_form(form_class)
 		if form.is_valid():
-			messages.success(request, 'Login Successfully.')
 			return self.form_valid(form)
 		else:
-			messages.error(request, 'Fail to Login.')
+			messages.error(request, 'Login fails.')
 			return self.form_invalid(form)
 
 class LogoutView(View):
