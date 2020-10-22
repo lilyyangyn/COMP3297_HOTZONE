@@ -9,6 +9,7 @@ verify_ssl = true
 django = "~=3.1.2"
 psycopg2-binary = "*"
 django-bootstrap4 = "*"
+django-widget-tweaks = "*"
 
 [requires]
 python_version = "3.8"
