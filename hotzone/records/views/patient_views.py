@@ -4,17 +4,17 @@ from ..models import Patient
 from django.urls import reverse
 
 class PatientAllView(ListView):
-	template_name = "record/patient/patient_index.html"
+	template_name = "record/patient/index.html"
 	model = Patient
 	instanceName = 'patient'
 
 class PatientShowView(CustomizedShowView):
-	template_name = "record/patient/patient_show.html"
+	template_name = "record/patient/show.html"
 	model = Patient
 	instanceName = 'patient'
 
 class PatientCreateView(CustomizedCreateView):
-	template_name = "record/patient/patient_new.html"
+	template_name = "record/patient/new.html"
 	model = Patient
 	fields = '__all__'
 	success_notice = 'Data saved. Creation successfully.'
@@ -24,7 +24,7 @@ class PatientCreateView(CustomizedCreateView):
 		return reverse('records:patient-show', kwargs={'id': self.kwargs['id']})
 
 class PatientEditView(CustomizedEditView):
-	template_name = "record/patient/patient_edit.html"
+	template_name = "record/patient/edit.html"
 	model = Patient
 	fields = '__all__'
 	success_notice_changed = 'Data saved. Edit successfully.'
