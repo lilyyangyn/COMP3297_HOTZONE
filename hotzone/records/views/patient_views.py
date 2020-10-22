@@ -6,7 +6,6 @@ from django.urls import reverse
 class PatientAllView(ListView):
 	template_name = "record/patient/index.html"
 	model = Patient
-	instanceName = 'patient'
 
 class PatientShowView(CustomizedShowView):
 	template_name = "record/patient/show.html"

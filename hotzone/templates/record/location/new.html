@@ -1,0 +1,24 @@
+{% extends 'form.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Location Create | HotZone{% endblock %}
+
+{% block form_card_title %}New Location{% endblock %}
+
+{% block form_card_body %}
+<div class="input-group" style="margin-bottom: 25px">
+  <div class="input-group-prepend">
+    <span class="input-group-text"><i class="fa fa-location-arrow" aria-hidden="true"></i></span>
+  </div>
+	{{ form.name | add_class:"form-control" }}
+
+  {% if form.name.errors %}
+  <div class="form-validate_error">{{ form.name.errors }}</div>
+  {% endif %}
+</div>
+
+<div class="controls">
+  <input class="btn btn-danger btn-block" type="submit" value="Save" />
+</div>
+{% endblock %}

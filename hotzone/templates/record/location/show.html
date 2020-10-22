@@ -1,0 +1,28 @@
+{% extends 'show.html' %}
+
+{% block title %}Location Detail | HotZone{% endblock %}
+
+{% block detail_card_title %}Location Detail{% endblock %}
+
+{% block detail_table_content %}
+<tr>
+	<td>Name</td>
+	<td>{{ location.name }}</td>
+</tr>
+<tr>
+	<td>Address</td>
+	<td>{{ location.address }}</td>
+</tr>
+<tr>
+	<td>X-Coordinate</td>
+	<td>{{ location.XCoord }}</td>
+</tr>
+<tr>
+	<td>Y-Coordinate</td>
+	<td>{{ location.YCoord }}</td>
+</tr>
+{% endblock %}
+
+{% block show_buttons %}
+<button type="button" class="btn btn-lg btn-danger btn-block" onclick="location.href='{% url 'records:locations' %}'">Menu</button>
+{% endblock %}

@@ -19,4 +19,17 @@ urlpatterns = [
 	path('patient/delete/<int:id>',
 		views.PatientDeleteView.as_view(),
 		name='patient-delete'),
+
+	path('locations',
+		views.LocationAllView.as_view(),
+		name='locations'),
+	path('location/<int:id>',
+		views.LocationShowView.as_view(),
+		name='location-show'),
+	path('location/new',
+		views.LocationCreateView.as_view(),
+		name='location-new'),
+	path('location/delete/<int:id>',
+		views.LocationDeleteView.as_view(),
+		name='location-delete'),
 ]
