@@ -36,9 +36,15 @@
                 </ul>
             </li>
 
+            {% if user.is_superuser %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin:index' %}">Console</a>
+            </li>
+            {% endif %}
+
     		{% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'customauth:logout' %}"><i class="fa fa-sign-out" aria-hidden="true">&nbspLogout</i></a>
+                <a class="nav-link" href="{% url 'customauth:logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbspLogout</a>
             </li>
     		{% else %}
     		<li>
