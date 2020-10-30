@@ -7,18 +7,93 @@
 {% block form_card_title %}New Location{% endblock %}
 
 {% block form_card_body %}
-<div class="input-group" style="margin-bottom: 25px">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-location-arrow" aria-hidden="true"></i></span>
+<form action="{% url 'records:location-query' %}" method="POST">
+  {% csrf_token %}
+  <div class="input-group" style="margin-bottom: 25px">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-location-arrow" aria-hidden="true"></i></span>
+    </div>
+  	{{ search_form.name | add_class:"form-control" }}
+    <div class="input-group-append">
+      <span class="input-group-text" style="height:40px;"><input class="btn" type="submit" value="Search" /></span>
+    </div>
+
+    {% if form.name.errors %}
+    <div class="form-validate_error">{{ form.name.errors }}</div>
+    {% endif %}
   </div>
-	{{ form.name | add_class:"form-control" }}
+</form>
 
-  {% if form.name.errors %}
-  <div class="form-validate_error">{{ form.name.errors }}</div>
-  {% endif %}
-</div>
+<form id="loc-selection-form" action="{% url 'records:location-create' %}" method="POST">
+  {% csrf_token %}
+  <div class="card card-info" style="margin-bottom: 25px;height:350px;">
+    <div style="padding-top:10px;" class="card-body" >
+      <table class="table text-center">
+        <thead>
+          <tr class="d-flex">
+            <th class="col-4">Name</th>
+            <th class="col-4">Address</th>
+            <th class="col-2">XCoord</th>
+            <th class="col-2">YCoord</th>
+          </tr>
+        </thead>
+      </table>
+      <div style="overflow-y:scroll;height:83%">
+        <table class="table text-center" id="option-table">
+          <tbody>
+            {% for data in data_list %}
+            <input type="radio" id="radio-opt-{{forloop.counter}}" name="location" value="{{ data }}" style="display:none;">
+            <tr class="d-flex clickable-row" id="row-opt-{{forloop.counter}}">
+              <td class="col-4">{{ data.name }}</td>
+              <td class="col-4">{% if data.address %}{{ data.address }}{% endif %}</td>
+              <td class="col-2">{{ data.XCoord }}</td>
+              <td class="col-2">{{ data.YCoord }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>  
+  </div>
 
-<div class="controls">
-  <input class="btn btn-danger btn-block" type="submit" value="Save" />
-</div>
+  <div class="controls">
+    <input class="btn btn-danger btn-block" type="submit" value="Save" />
+  </div>
+</form>
+{% endblock %}
+
+{% block extra_styles %}
+<style>
+  .active {
+    background-color:#E0E0E0;
+  }
+  .hover {
+    background-color:#F0F0F0;
+  }
+</style>
+{% endblock %}
+
+{% block bootstrap4_extra_script %}
+{{ block.super }}
+<script type="text/javascript">
+$('#option-table').on('click', '.clickable-row', function(event) {
+  $(this).removeClass('hover');
+  $(this).addClass('active').siblings().removeClass('active');
+
+  var rowId = $(this).attr('id');
+  var optIdx = rowId.substr(rowId.indexOf("-"));
+  var radioId = "radio" + optIdx;
+  $("#"+radioId).prop("checked",true);
+});
+
+$('#option-table').on('mouseenter', '.clickable-row', function(event) {
+  if (!$(this).hasClass('active')) {
+    $(this).addClass('hover');
+  }
+}).on('mouseleave', '.clickable-row', function(event) {
+  if (!$(this).hasClass('active')) {
+    $(this).removeClass('hover');
+  }
+});
+</script>
 {% endblock %}

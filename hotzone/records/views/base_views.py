@@ -26,7 +26,7 @@ class CustomizedCreateView(CreateView):
 		return HttpResponseRedirect(self.get_success_url())
 
 	def form_invalid(self, form):
-		messages.error(self.request, self.error)
+		messages.error(self.request, self.error_notice)
 		return super().form_invalid(form)
 
 class CustomizedEditView(UpdateView):

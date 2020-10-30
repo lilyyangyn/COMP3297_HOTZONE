@@ -12,12 +12,14 @@
         <div class="card-title" style="font-size: 18px;margin-top: 20px;font-weight: bold;">{% block form_card_title %}{% endblock %}</div>
       </div>
       <div style="padding-top:30px;" class="card-body" >
+        {% block form_card_body %}
       	<form method="POST">
       		{% csrf_token %}
 
-          {% block form_card_body %}{% endblock %}
+          {% block form_card_form_body %}{% endblock %}
 
         </form>
+        {% endblock %}
       </div>
     </div>	
   </div>
