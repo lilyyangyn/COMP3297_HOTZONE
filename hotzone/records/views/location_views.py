@@ -35,6 +35,8 @@ class LocationCreateMainView(TemplateView):
 					'XCoord': xCoord, 
 					'YCoord': yCoord
 				},)
+				# assume there is only one returned location result
+				break;
 		
 		context = self.get_context_data(**kwargs)
 		context['data_list'] = dataList
@@ -96,6 +98,7 @@ class LocationQueryView(FormView):
 	template_name = "record/location/new.html"
 	form_class = LocationQueryForm
 	success_info_notice = "Please select a appropriate location below"
+	error_no_reponse_notice = "GeoData does not response."
 	error_notice = 'Fail to query GeoData.'
 
 	def get_success_url(self):
@@ -105,23 +108,27 @@ class LocationQueryView(FormView):
 		locName = form.cleaned_data['name']
 		locDataList = self.get_query_data(self.get_query_url(locName))
 		self.request.session['query_loc'] = locName
-		self.request.session['data_list'] = locDataList
-		messages.info(self.request, self.success_info_notice)
-		return HttpResponseRedirect(self.get_success_url())
+		if locDataList:
+			self.request.session['data_list'] = locDataList
+			messages.info(self.request, self.success_info_notice)
+			return HttpResponseRedirect(self.get_success_url())
+		else:
+			return HttpResponseRedirect(reverse('records:location-new'))
 
 	def get_query_data(self, queryUrl):
 		attempt_num = 0
-		res = requests.get(queryUrl)
+		res = requests.get(queryUrl, timeout=5)
 		if res.status_code == 200:	# OK
 			data = res.json()
 			return data
+		elif not res:
+			messages.error(self.request, self.error_no_reponse_notice)
 		else:
 			messages.error(self.request, self.error_notice)
 		return None
 
 	def get_query_url(self, queryKey):
 		encodedKey = urllib.parse.quote(queryKey)
-		print(encodedKey)
 		return "https://geodata.gov.hk/gs/api/v1.0.0/locationSearch?q=" + encodedKey;
 
 	def get(self, request, *args, **kwargs):

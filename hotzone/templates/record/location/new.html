@@ -42,8 +42,13 @@
         <table class="table text-center" id="option-table">
           <tbody>
             {% for data in data_list %}
+            {% if forloop.counter == 1 %}
+            <input type="radio" id="radio-opt-{{forloop.counter}}" name="location" value="{{ data }}" checked="checked" style="display:none;">
+            <tr class="d-flex clickable-row active" id="row-opt-{{forloop.counter}}">
+            {% else %}
             <input type="radio" id="radio-opt-{{forloop.counter}}" name="location" value="{{ data }}" style="display:none;">
             <tr class="d-flex clickable-row" id="row-opt-{{forloop.counter}}">
+            {% endif %}
               <td class="col-4">{{ data.name }}</td>
               <td class="col-4">{% if data.address %}{{ data.address }}{% endif %}</td>
               <td class="col-2">{{ data.XCoord }}</td>
