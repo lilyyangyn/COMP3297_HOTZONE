@@ -7,6 +7,8 @@ import requests
 import urllib.parse
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 class LocationAllView(ListView):
 	template_name = "record/location/index.html"
@@ -19,6 +21,10 @@ class LocationShowView(CustomizedShowView):
 
 class LocationCreateMainView(TemplateView):
 	template_name = "record/location/new.html"
+
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super().dispatch(*args, **kwargs)
 
 	def get(self, request, *args, **kwargs):
 		locName = self.request.session.get('query_loc')
@@ -100,6 +106,10 @@ class LocationQueryView(FormView):
 	success_info_notice = "Please select a appropriate location below"
 	error_no_reponse_notice = "GeoData does not response."
 	error_notice = 'Fail to query GeoData.'
+
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super().dispatch(*args, **kwargs)
 
 	def get_success_url(self):
 		return reverse('records:location-new')
