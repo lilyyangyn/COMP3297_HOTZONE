@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'customauth.apps.CustomauthConfig',
     'bootstrap4',
     'widget_tweaks',
+    'environs',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
