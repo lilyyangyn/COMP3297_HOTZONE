@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['dry-mesa-46974.herokuapp.com', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'home.apps.HomeConfig',
     'records.apps.RecordsConfig',
     'customauth.apps.CustomauthConfig',
     'bootstrap4',
