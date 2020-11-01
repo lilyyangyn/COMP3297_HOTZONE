@@ -1,5 +1,7 @@
 # HotZone
-A web for data managemennt, cases clustering and analysis
+A web for data managemennt, cases clustering and analysis.
+
+Access HotZone with URL: https://dry-mesa-46974.herokuapp.com/
 
 ### Notices
 The project currently does not provide user-authentication pages. User can use django-admin to login.
