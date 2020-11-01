@@ -13,6 +13,7 @@ django-widget-tweaks = "*"
 requests = "*"
 gunicorn = "*"
 whitenoise = "*"
+environs = {extras = ["django"], version = "*"}
 
 [requires]
 python_version = "3.8"
