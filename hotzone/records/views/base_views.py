@@ -69,3 +69,7 @@ class CustomizedDeleteView(DeleteView):
 
 	def get(self, *args, **kwargs):
 		return self.post(*args, **kwargs)
+
+	def delete(self, request, *args, **kwargs):
+		messages.success(self.request, self.success_message)
+		return super().delete(request, *args, **kwargs)
