@@ -44,11 +44,11 @@
 
     		{% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'customauth:logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbspLogout</a>
+                <a class="nav-link" href="{% url 'admin:logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbspLogout</a>
             </li>
     		{% else %}
     		<li>
-                <a class="nav-link" href="{% url 'customauth:login' %}"><i class="fa fa-sign-in" aria-hidden="true">&nbspLogin</i></a>
+                <a class="nav-link" href="{% url 'admin:login' %}"><i class="fa fa-sign-in" aria-hidden="true">&nbspLogin</i></a>
             </li>
     		{% endif %}
         </ul>
