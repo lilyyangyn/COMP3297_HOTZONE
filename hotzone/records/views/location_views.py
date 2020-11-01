@@ -1,5 +1,5 @@
-from django.views.generic import ListView, TemplateView, FormView
-from ..views import CustomizedShowView, CustomizedCreateView, CustomizedEditView, CustomizedDeleteView
+from django.views.generic import TemplateView, FormView
+from ..views import CustomizedListView, CustomizedShowView, CustomizedCreateView, CustomizedEditView, CustomizedDeleteView
 from ..models import Location
 from ..forms import LocationQueryForm, LocationCreateForm
 from django.urls import reverse
@@ -10,7 +10,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-class LocationAllView(ListView):
+class LocationAllView(CustomizedListView):
 	template_name = "record/location/index.html"
 	model = Location
 
@@ -18,6 +18,10 @@ class LocationShowView(CustomizedShowView):
 	template_name = "record/location/show.html"
 	model = Location
 	instanceName = 'location'
+
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super().dispatch(*args, **kwargs)
 
 class LocationCreateMainView(TemplateView):
 	template_name = "record/location/new.html"

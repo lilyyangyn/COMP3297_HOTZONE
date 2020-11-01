@@ -1,9 +1,8 @@
-from django.views.generic import ListView
-from ..views import CustomizedShowView, CustomizedCreateView, CustomizedEditView, CustomizedDeleteView
+from ..views import CustomizedListView, CustomizedShowView, CustomizedCreateView, CustomizedEditView, CustomizedDeleteView
 from ..models import Patient
 from django.urls import reverse
 
-class PatientAllView(ListView):
+class PatientAllView(CustomizedListView):
 	template_name = "record/patient/index.html"
 	model = Patient
 

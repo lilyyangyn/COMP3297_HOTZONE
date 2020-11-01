@@ -6,7 +6,16 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 
+class CustomizedListView(ListView):
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super().dispatch(*args, **kwargs)
+
 class CustomizedShowView(TemplateView):
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super().dispatch(*args, **kwargs)
+		
 	def get_context_data(self, **kwargs):
 		instance = get_object_or_404(self.model, pk=self.kwargs['id'])
 		context = super().get_context_data()
