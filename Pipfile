@@ -11,6 +11,8 @@ psycopg2-binary = "*"
 django-bootstrap4 = "*"
 django-widget-tweaks = "*"
 requests = "*"
+gunicorn = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.8"
