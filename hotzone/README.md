@@ -4,11 +4,11 @@ A web for data managemennt, cases clustering and analysis.
 Access HotZone with URL: https://dry-mesa-46974.herokuapp.com/
 
 ### Notices
-The project currently does not provide user-authentication pages. User can use django-admin to login.
+The project currently does not provide user-authentication pages. User can use django-admin to login. The admin page in production environment use all static assets (css, js, etc.) that used in development by default.
 
 All data management pages are restricted to login-only. Therefore, unauthenticated visitors are redirected to admin login page before they can access their target management page.
 
-The websie now only provide functionalities related to location management, including view, add and delete. For location data returned by GeoData without a nameEN value, name in the search box is used.
+The websie now only provide functionalities related to location management, including view, add and delete. For location data returned by GeoData without a nameEN value, name in the search box is used. The index page of location is https://dry-mesa-46974.herokuapp.com/records/locations
 
 ### Deployment
 The project is deployed using heroku, with postgresql as its database.
