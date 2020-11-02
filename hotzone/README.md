@@ -8,7 +8,7 @@ The project currently does not provide user-authentication pages. User can use d
 
 All data management pages are restricted to login-only. Therefore, unauthenticated visitors are redirected to admin login page before they can access their target management page.
 
-The websie now only provide functionalities related to location management, including view, add and delete.
+The websie now only provide functionalities related to location management, including view, add and delete. For location data returned by GeoData without a nameEN value, name in the search box is used.
 
 ### Deployment
 The project is deployed using heroku, with postgresql as its database.
