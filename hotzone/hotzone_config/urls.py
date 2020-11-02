@@ -22,9 +22,3 @@ urlpatterns = [
     #path('', include('customauth.urls')),
     path('records/', include('records.urls')),
 ]
-
-urlpatterns += patterns('',
-        url(r'^static/(?P<path>.*)$', 'django.contrib.staticfiles.urls', {
-            'document_root': settings.STATIC_ROOT,
-        }),
-    )
