@@ -46,7 +46,6 @@ class LocationCreateMainView(TemplateView):
 					'YCoord': yCoord
 				},)
 				# assume there is only one returned location result
-				break;
 		
 		context = self.get_context_data(**kwargs)
 		context['data_list'] = dataList
