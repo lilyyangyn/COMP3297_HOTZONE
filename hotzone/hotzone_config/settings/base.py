@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 from environs import Env
 env = Env()
@@ -85,7 +85,6 @@ WSGI_APPLICATION = 'hotzone_config.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': env.dj_db_url('DATABASE_URL'),
     'dev': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'hotzone',
@@ -94,6 +93,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',
     },
+    'prod': env.dj_db_url('DATABASE_URL'),
 }
 
 # customized user model
@@ -138,7 +138,3 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
-STATIC_ROOT=str(BASE_DIR.joinpath('static'))
