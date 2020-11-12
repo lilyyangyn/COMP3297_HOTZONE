@@ -81,8 +81,6 @@ class LocationCreateView(CustomizedCreateView):
 	template_name = "record/location/new.html"
 	form_class = LocationCreateForm
 	model = Location
-	success_notice = 'Data saved. Creation successfully.'
-	error_notice = 'Something is wrong. Creation fails.'
 
 	def get_success_url(self):
 		return reverse('records:location-show', kwargs={'id': self.kwargs['id']})
@@ -156,7 +154,6 @@ class LocationQueryView(FormView):
 		return HttpResponseRedirect(reverse('records:location-new'))
 
 class LocationDeleteView(CustomizedDeleteView):
-	success_message = 'Delete Successfully.'
 	model = Location
 
 	def get_success_url(self):
