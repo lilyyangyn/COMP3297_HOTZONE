@@ -14,6 +14,18 @@ class LocationAllView(CustomizedListView):
 	template_name = "record/location/index.html"
 	model = Location
 
+	def get_queryset(self):
+		filters = {}
+		name = self.request.GET.get('qname').strip()
+		if name:
+			filters['name'] = name
+		address = self.request.GET.get('qaddr').strip()
+		if address:
+			filters['address'] = address
+
+		object_list = Location.objects.filter(**filters)
+		return object_list
+
 class LocationShowView(CustomizedShowView):
 	template_name = "record/location/show.html"
 	model = Location
@@ -79,8 +91,6 @@ class LocationCreateView(CustomizedCreateView):
 
 	def form_valid(self, form):
 		submit_location = eval(form.data['location'])
-		print(submit_location)
-		print(submit_location['name'])
 		location = self.model(
 				name = submit_location['name'],
 				XCoord = submit_location['XCoord'],

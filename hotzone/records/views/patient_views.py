@@ -6,6 +6,18 @@ class PatientAllView(CustomizedListView):
 	template_name = "record/patient/index.html"
 	model = Patient
 
+	def get_queryset(self):
+		filters = {}
+		name = self.request.GET.get('qname').strip()
+		if name:
+			filters['name'] = name
+		identity = self.request.GET.get('qid').strip()
+		if identity:
+			filters['identity'] = identity
+
+		object_list = Patient.objects.filter(**filters)
+		return object_list
+
 class PatientShowView(CustomizedShowView):
 	template_name = "record/patient/show.html"
 	model = Patient

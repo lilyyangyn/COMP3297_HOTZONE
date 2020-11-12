@@ -6,6 +6,19 @@
 
 {% block index_content %}
 <h3>Total Patients: <span style="color:red;">{{ patient_list.all | length }}</span></h3>
+
+<br>
+
+<form method="get" class="text-center data-filter-form">
+    <div style="width:30%">
+		<span>Name: </span><input type="text" name="qname">
+	</div>
+	<div style="width:30%">
+		<span>HKID: </span><input type="text" name="qid">
+	</div>
+	<input type="submit" value="Search">
+</form>
+
 <br>
 
 <table class="table text-center">
