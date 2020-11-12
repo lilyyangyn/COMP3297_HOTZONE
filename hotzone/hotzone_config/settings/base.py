@@ -118,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # login url
-LOGIN_URL = '/admin/login'
+LOGIN_URL = '/login'
 
 
 # Internationalization

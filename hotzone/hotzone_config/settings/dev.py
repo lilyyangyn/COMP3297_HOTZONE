@@ -8,4 +8,3 @@ STATICFILES_DIRS = [
 
 INSTALLED_APPS = INSTALLED_APPS + ['customauth.apps.CustomauthConfig',]
 AUTH_USER_MODEL = 'customauth.Staff'
-LOGIN_URL = '/login'
