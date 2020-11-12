@@ -27,21 +27,13 @@ class LoginView(FormView):
 			self.request.session.set_expiry(0)
 
 		messages.success(self.request, 'Login successfully.')
-		return HttpResponseRedirect(self.get_success_url())
+		return super().form_valid(form)
 
 	def get_success_url(self):
-		redirect_url = self.success_url if self.success_url else self.next_url
-
-		nextLocation = parse.urlparse(redirect_url)
-		isSameHost = (nextLocation == self.request.get_host())
-
-		if not (redirect_url and isSameHost):
-			redirect_url = reverse('records:patients')
-		return redirect_url
-
-	def get(self, request, *args, **kwargs):
-		self.next_url = request.GET.get('next', '')
-		return super(LoginView, self).get(request, *args, **kwargs)
+		next_url = self.request.GET.get('next', '')
+		if not next_url:
+			next_url = reverse('home:homepage')
+		return next_url
 
 	def post(self, request, *args, **kwargs):
 		form_class = self.get_form_class()
@@ -49,7 +41,7 @@ class LoginView(FormView):
 		if form.is_valid():
 			return self.form_valid(form)
 		else:
-			messages.error(request, 'Login fails.')
+			messages.error(request, 'Please enter the correct username and password')
 			return self.form_invalid(form)
 
 class LogoutView(View):
