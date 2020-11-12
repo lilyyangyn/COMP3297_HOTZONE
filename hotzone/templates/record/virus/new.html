@@ -2,9 +2,9 @@
 
 {% load widget_tweaks %}
 
-{% block title %}Patient Create | HotZone{% endblock %}
+{% block title %}Virus Create | HotZone{% endblock %}
 
-{% block form_card_title %}New Patient{% endblock %}
+{% block form_card_title %}New Virus{% endblock %}
 
 {% block form_card_form_body %}
 <div class="input-group" style="margin-bottom: 25px">
@@ -20,23 +20,23 @@
 
 <div class="input-group" style="margin-bottom: 25px">
   <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-id-card" aria-hidden="true"></i>&nbsp&nbspHKID</span>
+    <span class="input-group-text"><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp&nbspCommon Name</span>
   </div>
-	{{ form.identity | add_class:"form-control" }}
+	{{ form.commonName | add_class:"form-control" }}
 
-  {% if form.identity.errors %}
-  <div class="form-validate_error">{{ form.identity.errors }}</div>
+  {% if form.commonName.errors %}
+  <div class="form-validate_error">{{ form.commonName.errors }}</div>
   {% endif %}
 </div>
 
 <div class="input-group" style="margin-bottom: 25px">
   <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-birthday-cake" aria-hidden="true"></i>&nbsp&nbspDate of Birth</span>
+    <span class="input-group-text"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp&nbspMax. Infection Period</span>
   </div>
-	{{ form.birth | add_class:"form-control" }}
+	{{ form.maxPeriod | add_class:"form-control" }}
 
-  {% if form.birth.errors %}
-  <div class="form-validate_error">{{ form.birth.errors }}</div>
+  {% if form.maxPeriod.errors %}
+  <div class="form-validate_error">{{ form.maxPeriod.errors }}</div>
   {% endif %}
 </div>
 

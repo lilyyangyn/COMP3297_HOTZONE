@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+
+{% block title %}Viruses | HotZone{% endblock %}
+
+{% block index_header %}Viruses{% endblock %}
+
+{% block index_content %}
+<h3>Total Viruses: <span style="color:red;">{{ virus_list.all | length }}</span></h3>
+
+<br>
+
+<form method="get" class="text-center data-filter-form">
+    <div style="width:30%">
+		<span>Name: </span><input type="text" name="qname">
+	</div>
+	<input type="submit" value="Search">
+</form>
+
+<br>
+
+<table class="table text-center">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Common Name</th>
+			<th>Max. Infection Period (Days)</th>
+			<th>Operations</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% for virus in virus_list %}
+		<tr>
+			<td>{{ virus.name }}</td>
+			<td>{{ virus.commonName }}</td>
+			<td>{{ virus.maxPeriod }}</td>
+			<td>
+				<a href="{% url 'records:virus-show' virus.pk %}">Show&nbsp<i class="fa fa-address-book-o" aria-hidden="true"></i></a>
+				&nbsp|&nbsp
+				<a href="{% url 'records:virus-edit' virus.pk %}">Edit&nbsp<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+				&nbsp|&nbsp
+				<a href="{% url 'records:virus-delete' virus.pk %}">Delete&nbsp<i class="fa fa-times" aria-hidden="true"></i></a>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}
+
+{% block new_record_url %}{% url 'records:virus-new' %}{% endblock %}
