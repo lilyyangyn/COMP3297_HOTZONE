@@ -14,17 +14,15 @@ class LocationAllView(CustomizedListView):
 	template_name = "record/location/index.html"
 	model = Location
 
-	def get_queryset(self):
+	def get_filters(self):
 		filters = {}
-		name = self.request.GET.get('qname').strip()
+		name = self.request.GET.get('qname')
 		if name:
-			filters['name'] = name
-		address = self.request.GET.get('qaddr').strip()
+			filters['name'] = name.strip()
+		address = self.request.GET.get('qaddr')
 		if address:
-			filters['address'] = address
-
-		object_list = Location.objects.filter(**filters)
-		return object_list
+			filters['address'] = address.strip()
+		return filters
 
 class LocationShowView(CustomizedShowView):
 	template_name = "record/location/show.html"

@@ -11,6 +11,10 @@ class CustomizedListView(ListView):
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
 
+	def get_queryset(self):
+		object_list = self.model.objects.filter(**self.get_filters())
+		return object_list
+
 class CustomizedShowView(TemplateView):
 	@method_decorator(login_required)
 	def dispatch(self, *args, **kwargs):
