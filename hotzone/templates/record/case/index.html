@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+
+{% block title %}Case | HotZone{% endblock %}
+
+{% block index_header %}Cases{% endblock %}
+
+{% block index_content %}
+<h3>Total Cases: <span style="color:red;">{{ case_list.all | length }}</span></h3>
+
+<br>
+
+<form method="get" class="text-center data-filter-form">
+    <div style="width:20%">
+		<span>Case Number: </span><input type="text" name="qcaseid" style="width:60%">
+	</div>
+	<input type="submit" value="Search">
+</form>
+
+<br>
+
+<table class="table text-center">
+	<thead>
+		<tr>
+			<th>Case Number</th>
+			<th>Patient</th>
+			<th>Virus</th>
+			<th>Date Confirmed</th>
+			<th>Origin</th>
+			<th>Operations</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% for case in case_list %}
+		<tr>
+			<td>{{ case.caseNumber }}</td>
+			<td>{{ case.patient }}</td>
+			<td>{{ case.virus }}</td>
+			<td>{{ case.date }}</td>
+			<td>{{ case.origin }}</td>
+			<td>
+				<a href="{% url 'records:case-show' case.pk %}">Show&nbsp<i class="fa fa-address-book-o" aria-hidden="true"></i></a>
+				&nbsp|&nbsp
+				<a href="{% url 'records:case-edit' case.pk %}">Edit&nbsp<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+				&nbsp|&nbsp
+				<a href="{% url 'records:case-delete' case.pk %}">Delete&nbsp<i class="fa fa-times" aria-hidden="true"></i></a>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}
+
+{% block new_record_url %}{% url 'records:case-new' %}{% endblock %}
