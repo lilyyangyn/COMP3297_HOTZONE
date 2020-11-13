@@ -1,0 +1,31 @@
+{% extends 'show.html' %}
+
+{% block title %}Visit Detail | HotZone{% endblock %}
+
+{% block detail_card_title %}Visit Detail{% endblock %}
+
+{% block detail_table_content %}
+<tr>
+	<td>Case</td>
+	<td>{{ visit.case }}</td>
+</tr>
+<tr>
+	<td>Location</td>
+	<td>{{ visit.location }}</td>
+</tr>
+<tr>
+	<td>Date From</td>
+	<td>{{ visit.dateFrom }}</td>
+</tr>
+<tr>
+	<td>Date To</td>
+	<td>{{ visit.dateTo }}</td>
+</tr>
+<tr>
+	<td>Category</td>
+	<td>{{ visit.category }}</td>
+</tr>
+{% endblock %}
+
+{% block detail_edit_url %}{% url 'records:visit-edit' visit.pk %}{% endblock %}
+{% block detail_back_url %}{% url 'records:visits' visit.case.pk %}{% endblock %}

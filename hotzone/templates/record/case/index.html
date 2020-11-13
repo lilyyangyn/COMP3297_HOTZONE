@@ -39,7 +39,7 @@
 			<td>{{ case.date }}</td>
 			<td>{{ case.origin }}</td>
 			<td>
-				<a href="{% url 'records:case-show' case.pk %}">Show&nbsp<i class="fa fa-address-book-o" aria-hidden="true"></i></a>
+				<a href="{% url 'records:visits' case.pk %}">Show&nbsp<i class="fa fa-address-book-o" aria-hidden="true"></i></a>
 				&nbsp|&nbsp
 				<a href="{% url 'records:case-edit' case.pk %}">Edit&nbsp<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 				&nbsp|&nbsp

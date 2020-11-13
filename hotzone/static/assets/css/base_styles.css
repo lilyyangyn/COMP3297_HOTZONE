@@ -60,17 +60,22 @@ div.container-fluid{
   font-size:12px;
 }
 
-.data-filter-form{
-  display:-webkit-flex;
-  display:flex;
+/* index filter form */
+.data-filter{
   margin-top:5px;
   margin-bottom:15px;
 }
 
-.data-filter-form div{
-  margin-right:5px;
+.data-filter p{
+  color:#E22121;
+  font-size:15px
 }
 
-.data-filter-form div input{
-  width:85%;
+.data-filter form{
+  display:-webkit-flex;
+  display:flex;
+}
+
+.data-filter form div{
+  margin-right:10px;
 }

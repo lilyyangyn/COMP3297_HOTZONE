@@ -37,8 +37,6 @@
 			<td>{{ location.XCoord }}</td>
 			<td>{{ location.YCoord }}</td>
 			<td>
-				<a href="{% url 'records:location-show' location.pk %}">Show&nbsp<i class="fa fa-address-book-o" aria-hidden="true"></i></a>
-				&nbsp|&nbsp
 				<a href="{% url 'records:location-delete' location.pk %}">Delete&nbsp<i class="fa fa-times" aria-hidden="true"></i></a>
 			</td>
 		</tr>
