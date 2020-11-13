@@ -9,12 +9,14 @@
 
 <br>
 
-<form method="get" class="text-center data-filter-form">
-    <div style="width:20%">
-		<span>Case Number: </span><input type="text" name="qcaseid" style="width:60%">
-	</div>
-	<input type="submit" value="Search">
-</form>
+<div class="data-filter">
+	<form method="get" class="text-center">
+	    <div>
+			<span>Case Number: </span><input type="text" name="qcaseid">
+		</div>
+		<input type="submit" value="Search">
+	</form>
+</div>
 
 <br>
 
@@ -39,8 +41,6 @@
 			<td>{{ case.date }}</td>
 			<td>{{ case.origin }}</td>
 			<td>
-				<a href="{% url 'records:visits' case.pk %}">Show&nbsp<i class="fa fa-address-book-o" aria-hidden="true"></i></a>
-				&nbsp|&nbsp
 				<a href="{% url 'records:case-edit' case.pk %}">Edit&nbsp<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 				&nbsp|&nbsp
 				<a href="{% url 'records:case-delete' case.pk %}">Delete&nbsp<i class="fa fa-times" aria-hidden="true"></i></a>
