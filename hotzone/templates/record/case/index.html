@@ -41,6 +41,8 @@
 			<td>{{ case.date }}</td>
 			<td>{{ case.origin }}</td>
 			<td>
+				<a href="{% url 'records:visits' case.pk %}">Show Visits&nbsp<i class="fa fa-file" aria-hidden="true"></i></a>
+				&nbsp|&nbsp
 				<a href="{% url 'records:case-edit' case.pk %}">Edit&nbsp<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 				&nbsp|&nbsp
 				<a href="{% url 'records:case-delete' case.pk %}">Delete&nbsp<i class="fa fa-times" aria-hidden="true"></i></a>
