@@ -43,6 +43,7 @@ class LocationCreateMainView(TemplateView):
 	def get(self, request, *args, **kwargs):
 		locName = self.request.session.get('query_loc')
 		dataList = []
+		# Get the data from Geo DataBase
 		if request.session.get('data_list'):
 			for data in request.session.get('data_list'):
 				name = data['nameEN'] if data['nameEN'] else locName
@@ -85,13 +86,28 @@ class LocationCreateView(CustomizedCreateView):
 	def get_success_url(self):
 		return reverse('records:location-show', kwargs={'id': self.kwargs['id']})
 
+	def get_duplication_url(self):
+		return reverse('records:locations')
+
 	def form_valid(self, form):
 		submit_location = eval(form.data['location'])
-		location = self.model(
-				name = submit_location['name'],
-				XCoord = submit_location['XCoord'],
-				YCoord = submit_location['YCoord'],
-			)
+		dp_flag = False
+		try:
+			duplicate = self.model.objects.get(name=submit_location['name'])
+			if duplicate.XCoord== submit_location['XCoord'] and duplicate.YCoord== submit_location['YCoord']:
+				dp_flag = True
+		except self.model.DoesNotExist:
+			pass
+		if dp_flag == False:
+			location = self.model(
+					name = submit_location['name'],
+					XCoord = submit_location['XCoord'],
+					YCoord = submit_location['YCoord'],
+				)
+		else:
+			messages.info(self.request,self.duplication_notice)
+			return HttpResponseRedirect(self.get_duplication_url())
+
 		if submit_location['address']:		# query succeeds
 			setattr(location, 'address', submit_location['address'])
 

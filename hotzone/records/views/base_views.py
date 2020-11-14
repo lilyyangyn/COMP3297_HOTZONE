@@ -29,6 +29,7 @@ class CustomizedShowView(TemplateView):
 class CustomizedCreateView(CreateView):
 	success_notice = 'Data saved. Creation successfully.'
 	error_notice = 'Something is wrong. Creation fails.'
+	duplication_notice = 'The Entry already exist.'
 
 	@method_decorator(login_required)
 	def dispatch(self, *args, **kwargs):

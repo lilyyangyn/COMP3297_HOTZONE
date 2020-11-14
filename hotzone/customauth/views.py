@@ -1,5 +1,5 @@
 from django.views.generic import FormView, View
-from .forms import LoginForm
+from .forms import LoginForm,EmailForm
 from django.contrib.auth import login, logout
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
@@ -51,8 +51,10 @@ class LogoutView(View):
 			messages.success(request, 'Logout Successfully.')
 		return HttpResponseRedirect(reverse('customauth:login'))
 
-
-
+class ForgetPwdView(FormView):
+	template_name = 'auth/forget_pwd.html'
+	form_class = EmailForm
+	success_url = '/login'
 
 
 
