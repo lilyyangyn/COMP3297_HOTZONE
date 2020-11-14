@@ -46,8 +46,12 @@
                 <a class="nav-link" href="{% url 'customauth:logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbspLogout</a>
             </li>
     		{% else %}
-    		<li>
-                <a class="nav-link" href="{% url 'customauth:login' %}"><i class="fa fa-sign-in" aria-hidden="true">&nbspLogin</i></a>
+    		<li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li class="fa fa-sign-in dropdown-item"><a href="{% url 'customauth:login' %}">&nbspStaff</a></li>
+                    <li class="fa fa-sign-in dropdown-item"><a href="admin/">&nbspAdmin</a></li>
+    			</ul>
             </li>
     		{% endif %}
         </ul>

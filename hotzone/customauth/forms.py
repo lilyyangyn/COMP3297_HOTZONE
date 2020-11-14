@@ -15,3 +15,8 @@ class LoginForm(AuthenticationForm):
 			'required': 'Please enter your password',
 		})
 	remember_me = forms.BooleanField(required=False)
+
+class EmailForm(forms.Form):
+	email_addr = forms.EmailField(required=True)
+	def send_email(self,form):
+		pass
