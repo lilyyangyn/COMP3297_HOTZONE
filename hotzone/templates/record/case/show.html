@@ -1,0 +1,31 @@
+{% extends 'show.html' %}
+
+{% block title %}Case Detail | HotZone{% endblock %}
+
+{% block detail_card_title %}Case Detail{% endblock %}
+
+{% block detail_table_content %}
+<tr>
+	<td>Case Number</td>
+	<td>{{ case.caseNumber }}</td>
+</tr>
+<tr>
+	<td>Patient</td>
+	<td>{{ case.patient }}</td>
+</tr>
+<tr>
+	<td>Virus</td>
+	<td>{{ case.virus }}</td>
+</tr>
+<tr>
+	<td>Date Confirmed</td>
+	<td>{{ case.date }}</td>
+</tr>
+<tr>
+	<td>Original From</td>
+	<td>{{ case.origin }}</td>
+</tr>
+{% endblock %}
+
+{% block detail_back_url %}{% url 'records:cases' %}{% endblock %}
+{% block detail_edit_url %}{% url 'records:case-edit' case.pk %}{% endblock %}

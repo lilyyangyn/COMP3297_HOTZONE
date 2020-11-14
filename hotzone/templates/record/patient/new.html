@@ -12,10 +12,6 @@
     <span class="input-group-text"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp&nbspName</span>
   </div>
 	{{ form.name | add_class:"form-control" }}
-
-  {% if form.name.errors %}
-  <div class="form-validate_error">{{ form.name.errors }}</div>
-  {% endif %}
 </div>
 
 <div class="input-group" style="margin-bottom: 25px">
@@ -23,10 +19,6 @@
     <span class="input-group-text"><i class="fa fa-id-card" aria-hidden="true"></i>&nbsp&nbspHKID</span>
   </div>
 	{{ form.identity | add_class:"form-control" }}
-
-  {% if form.identity.errors %}
-  <div class="form-validate_error">{{ form.identity.errors }}</div>
-  {% endif %}
 </div>
 
 <div class="input-group" style="margin-bottom: 25px">
@@ -34,10 +26,6 @@
     <span class="input-group-text"><i class="fa fa-birthday-cake" aria-hidden="true"></i>&nbsp&nbspDate of Birth</span>
   </div>
 	{{ form.birth | add_class:"form-control" }}
-
-  {% if form.birth.errors %}
-  <div class="form-validate_error">{{ form.birth.errors }}</div>
-  {% endif %}
 </div>
 
 <div class="controls">

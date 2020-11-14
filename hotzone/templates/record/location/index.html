@@ -8,15 +8,17 @@
 <h3>Total Locations: <span style="color:red;">{{ location_list.all | length }}</span></h3>
 <br>
 
-<form method="get" class="text-center data-filter-form">
-    <div style="width:30%">
-		<span>Name: </span><input type="text" name="qname">
-	</div>
-	<div style="width:40%">
-		<span>Address: </span><input type="text" name="qaddr">
-	</div>
-	<input type="submit" value="Search">
-</form>
+<div class="data-filter">
+	<form method="get" class="text-center">
+	    <div>
+			<span>Name: </span><input type="text" name="qname">
+		</div>
+		<div>
+			<span>Address: </span><input type="text" name="qaddr">
+		</div>
+		<input type="submit" value="Search">
+	</form>
+</div>
 
 <table class="table text-center">
 	<thead>
@@ -37,8 +39,6 @@
 			<td>{{ location.XCoord }}</td>
 			<td>{{ location.YCoord }}</td>
 			<td>
-				<a href="{% url 'records:location-show' location.pk %}">Show&nbsp<i class="fa fa-address-book-o" aria-hidden="true"></i></a>
-				&nbsp|&nbsp
 				<a href="{% url 'records:location-delete' location.pk %}">Delete&nbsp<i class="fa fa-times" aria-hidden="true"></i></a>
 			</td>
 		</tr>
