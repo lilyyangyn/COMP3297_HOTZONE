@@ -22,7 +22,6 @@ a:hover,a:active{
 }
 
 header.navbar{
-  height: 70px !important;
   background: black;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -34,6 +33,10 @@ header.navbar{
 
 .nav>li{
   padding-top: 10px;
+}
+
+.dropdown-menu{
+  min-width: 8rem;
 }
 
 @media screen and (max-width: 750px){
