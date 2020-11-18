@@ -94,7 +94,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '',
     },
-    #'prod': env.dj_db_url('DATABASE_URL'),
+    'prod': env.dj_db_url('DATABASE_URL'),
 }
 
 # customized user model
