@@ -9,24 +9,17 @@
 {% block form_card_form_body %}
 <div class="input-group" style="margin-bottom: 25px">
   <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
+    <span class="input-group-text"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp&nbspUsername</span>
   </div>
 	{{ form.username | add_class:"form-control" }}
-
-  {% if form.username.errors %}
-  <div class="form-validate_error">{{ form.username.errors }}</div>
-  {% endif %}
 </div>
 
 <div class="input-group" style="margin-bottom: 25px">
   <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></span>
+    <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i>&nbsp&nbspPassword</span>
   </div>
   {{ form.password | add_class:"form-control" }}
 
-  {% if form.password.errors %}
-  <div class="form-validate_error">{{ form.password.errors }}</div>
-  {% endif %}
 </div>
 
 <div class="input-group" style="margin-bottom: 25px;">
