@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+{{ block.super }}
+<div class="page-header col-xs-12 col-lg-12 text-left" style="margin-top:30px">
+	<img style="margin-top:50px; height:88px;" src="{% static '/assets/images/checkmark.png' %}">
+	<br><br>
+    <h3>Enter Your Password</h3>
+
+    <p> Please enter your password twice</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="Submit" name="Update New Password">
+    </form>
+</div>
+{% endblock %}

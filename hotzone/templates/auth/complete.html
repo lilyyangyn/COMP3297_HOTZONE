@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+{{ block.super }}
+<div class="page-header col-xs-12 col-lg-12 text-center" style="margin-top:30px">
+	<img style="margin-top:50px; height:88px;" src="{% static '/assets/images/checkmark.png' %}">
+	<br><br>
+    <h1>Verification Complete</h1>
+    <a ref="{% url 'customauth/login' %}">
+</div>
+{% endblock %}

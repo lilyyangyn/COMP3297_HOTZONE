@@ -42,8 +42,13 @@
             {% endif %}
 
     		{% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'customauth:logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbspLogout</a>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li class="fa fa-signout dropdown-item"><a href="{% url 'customauth:logout' %}">Logout</a></li>
+                    <li class="fa fa-signout dropdown-item"><a href="{% url 'customauth:logout' %}">Change Password</a></li>
+                </ul>
+                <!--<a class="nav-link" href="{% url 'customauth:logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>-->
             </li>
     		{% else %}
     		<li class="nav-item dropdown">
