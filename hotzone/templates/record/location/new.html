@@ -37,20 +37,45 @@
       <div style="overflow-y:scroll;height:83%">
         <table class="table text-center" id="option-table">
           <tbody>
-            {% for data in data_list %}
-            {% if forloop.counter == 1 %}
-            <input type="radio" id="radio-opt-{{forloop.counter}}" name="location" value="{{ data }}" checked="checked" style="display:none;">
-            <tr class="d-flex clickable-row active" id="row-opt-{{forloop.counter}}">
+            {% if dbloc_list %}
+              <tr class="seperator-line">
+                <td class="col-12">Related Records Already Exist.</td>
+              </tr>
+              {% for data in dbloc_list %}
+              <tr class="d-flex db-info">
+                <td class="col-4">{{ data.name }}</td>
+                <td class="col-4">{% if data.address %}{{ data.address }}{% endif %}</td>
+                <td class="col-2">{{ data.XCoord }}</td>
+                <td class="col-2">{{ data.YCoord }}</td>
+              </tr>
+              {% endfor %}
+
+              {% if data_list %}
+              <tr class="d-flex db-info" align="left">
+                <td class="col-12"><a href="{% url 'records:locations' %}" style="color:red;"><i class="fa fa-backward" aria-hidden="true"></i>&nbspBack</a></td>
+              </tr>
+              <tr>
+                <td class="col-12"><br></td>
+              </tr>
+              <tr class="seperator-line">
+                <td class="col-12">Continue To Add New Records.</td>
+              </tr>
+              {% endif %}
             {% else %}
-            <input type="radio" id="radio-opt-{{forloop.counter}}" name="location" value="{{ data }}" style="display:none;">
-            <tr class="d-flex clickable-row" id="row-opt-{{forloop.counter}}">
+              <tr class="seperator-line">
+                <td class="col-12">No Existing Record. Please Add New One.</td>
+              </tr>
             {% endif %}
-              <td class="col-4">{{ data.name }}</td>
-              <td class="col-4">{% if data.address %}{{ data.address }}{% endif %}</td>
-              <td class="col-2">{{ data.XCoord }}</td>
-              <td class="col-2">{{ data.YCoord }}</td>
-            </tr>
-          {% endfor %}
+
+            {% for data in data_list %}
+              <input type="radio" id="radio-opt-{{forloop.counter}}" name="location" value="{{ data }}" style="display:none;">
+              <tr class="d-flex clickable-row" id="row-opt-{{forloop.counter}}">
+                <td class="col-4">{{ data.name }}</td>
+                <td class="col-4">{% if data.address %}{{ data.address }}{% endif %}</td>
+                <td class="col-2">{{ data.XCoord }}</td>
+                <td class="col-2">{{ data.YCoord }}</td>
+              </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
@@ -65,6 +90,13 @@
 
 {% block extra_styles %}
 <style>
+  .seperator-line {
+    background-color:#C9C8C8;
+    font-weight:bold
+  }
+  .db-info {
+    background-color:#F0F0F0;
+  }
   .active {
     background-color:#E0E0E0;
   }

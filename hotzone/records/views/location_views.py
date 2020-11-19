@@ -61,12 +61,18 @@ class LocationCreateMainView(TemplateView):
 		context = self.get_context_data(**kwargs)
 		context['data_list'] = dataList
 
+		locInDB = None
+		if locName:
+			locInDB = Location.objects.filter(name=locName).all()
+			print(locInDB)
+			context['dbloc_list'] = locInDB
+
 		search_form = LocationQueryForm(self.request.GET or None)
 		if locName:
 			search_form.fields['name'].initial = locName
 		context['search_form'] = search_form
 
-		if dataList:
+		if locInDB or dataList:
 			create_form = LocationCreateForm(request.GET or None)
 			context['create_form'] = create_form
 
@@ -87,24 +93,26 @@ class LocationCreateView(CustomizedCreateView):
 		return reverse('records:location-show', kwargs={'id': self.kwargs['id']})
 
 	def get_duplication_url(self):
-		return reverse('records:locations')
+		return reverse('records:location-show', kwargs={'id': self.kwargs['id']})
 
 	def form_valid(self, form):
 		submit_location = eval(form.data['location'])
 		dp_flag = False
 		try:
-			duplicate = self.model.objects.get(name=submit_location['name'])
-			if duplicate.XCoord== submit_location['XCoord'] and duplicate.YCoord== submit_location['YCoord']:
-				dp_flag = True
+			duplicate = self.model.objects.filter(
+				name=submit_location['name'],
+				XCoord=submit_location['XCoord'],
+				YCoord=submit_location['YCoord']).first()
 		except self.model.DoesNotExist:
 			pass
-		if dp_flag == False:
+		if not duplicate:
 			location = self.model(
 					name = submit_location['name'],
 					XCoord = submit_location['XCoord'],
 					YCoord = submit_location['YCoord'],
 				)
 		else:
+			self.kwargs['id'] = duplicate.pk
 			messages.info(self.request,self.duplication_notice)
 			return HttpResponseRedirect(self.get_duplication_url())
 
