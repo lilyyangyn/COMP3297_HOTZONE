@@ -1,20 +1,27 @@
-{% extends 'base.html' %}
+{% extends 'form.html' %}
 
-{% load static %}
+{% load widget_tweaks %}
 
-{% block content %}
-{{ block.super }}
-<div class="page-header col-xs-12 col-lg-12 text-left" style="margin-top:30px">
-	<img style="margin-top:50px; height:88px;" src="{% static '/assets/images/checkmark.png' %}">
-	<br><br>
-    <h3>Enter Your Password</h3>
+{% block title %}Reset Password | HotZone{% endblock %}
 
-    <p> Please enter your password twice</p>
+{% block form_card_title %}Enter Your New Password{% endblock %}
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="Submit" name="Update New Password">
-    </form>
+{% block form_card_form_body %}
+<div class="input-group" style="margin-bottom: 25px">
+  <div class="input-group-prepend">
+    <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i>&nbsp&nbspNew Password</span>
+  </div>
+	{{ form.new_password | add_class:"form-control" }}
+</div>
+
+<div class="input-group" style="margin-bottom: 25px">
+  <div class="input-group-prepend">
+    <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i>&nbsp&nbspConfirm Password</span>
+  </div>
+	{{ form.new_password_confirm | add_class:"form-control" }}
+</div>
+
+<div class="controls">
+  <input class="btn btn-danger btn-block" type="submit" value="Submit" />
 </div>
 {% endblock %}

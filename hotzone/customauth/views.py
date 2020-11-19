@@ -1,5 +1,5 @@
-from django.views.generic import FormView, View
-from .forms import LoginForm,EmailForm
+from django.views.generic import FormView, View, TemplateView
+from .forms import LoginForm, EmailForm, PasswordForm
 from django.contrib.auth import login, logout
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from urllib import parse
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 class LoginView(FormView):
 	template_name = 'auth/login.html'
@@ -54,7 +55,25 @@ class LogoutView(View):
 class ForgetPwdView(FormView):
 	template_name = 'auth/forget_pwd.html'
 	form_class = EmailForm
-	success_url = '/login'
+	
+	def get_success_url(self):
+		return reverse('customauth:email-sent')
 
+class ResetPwdView(FormView):
+	template_name = 'auth/reset_pwd.html'
+	form_class = PasswordForm
+	
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super().dispatch(*args, **kwargs)
+
+	def get_success_url(self):
+		return reverse('customauth:pwd-complete')
+
+class EmailSentView(TemplateView):
+	template_name = 'auth/sent_email.html'
+
+class PwdCompleteView(TemplateView):
+	template_name = 'auth/complete.html'
 
 

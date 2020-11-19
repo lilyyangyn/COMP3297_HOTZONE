@@ -41,12 +41,11 @@
 
     		{% if user.is_authenticated %}
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li class="fa fa-signout dropdown-item"><a href="{% url 'customauth:logout' %}">Logout</a></li>
-                    <li class="fa fa-signout dropdown-item"><a href="{% url 'customauth:logout' %}">Change Password</a></li>
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi, {{ user }}</a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <li class="dropdown-item"><a href="{% url 'customauth:reset-pwd' %}"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbspChange Password</a></li>
+                    <li class="dropdown-item"><a href="{% url 'customauth:logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbspLogout</a></li>
                 </ul>
-                <!--<a class="nav-link" href="{% url 'customauth:logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>-->
             </li>
     		{% else %}
     		<li class="nav-item dropdown">
