@@ -42,8 +42,8 @@ header.navbar{
 
 @media screen and (max-width: 750px){
   .nav>li{
-  padding-top: 0px;
-}
+    padding-top: 0px;
+  }
 }
 
 .nav > li > a:hover, .nav > li > a:focus{

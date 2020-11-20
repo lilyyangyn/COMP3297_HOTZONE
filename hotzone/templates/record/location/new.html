@@ -22,19 +22,21 @@
 
 <form id="loc-selection-form" action="{% url 'records:location-create' %}" method="POST">
   {% csrf_token %}
-  <div class="card card-info" style="margin-bottom: 25px;height:350px;">
+  <div class="card card-info" style="margin-bottom: 25px;height:380px;">
     <div style="padding-top:10px;" class="card-body" >
-      <table class="table text-center">
-        <thead>
-          <tr class="d-flex">
-            <th class="col-4">Name</th>
-            <th class="col-4">Address</th>
-            <th class="col-2">XCoord</th>
-            <th class="col-2">YCoord</th>
-          </tr>
-        </thead>
-      </table>
-      <div style="overflow-y:scroll;height:83%">
+      <div style="overflow:scroll;height:70px">
+        <table class="table text-center">
+          <thead>
+            <tr class="d-flex">
+              <th class="col-4">Name</th>
+              <th class="col-4">Address</th>
+              <th class="col-2">X</th>
+              <th class="col-2">Y</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div style="overflow:scroll;height:280px">
         <table class="table text-center" id="option-table">
           <tbody>
             {% if dbloc_list %}
