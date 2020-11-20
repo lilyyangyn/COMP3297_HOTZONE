@@ -43,7 +43,7 @@ class LoginView(FormView):
 		if form.is_valid():
 			return self.form_valid(form)
 		else:
-			messages.error(request, 'Please enter the correct username and password')
+			form.add_error('password', 'Please enter the correct username and password.')
 			return self.form_invalid(form)
 
 class LogoutView(View):
@@ -73,19 +73,15 @@ class ResetPwdView(FormView):
 		username = self.request.user.username
 		cur_user = auth.authenticate(username=username, password=old_password)
 		if cur_user is not None and cur_user.is_active:
-			print("HHHHHHHHHHH")
 			newpassword = form.cleaned_data['newpassword1']
 			cur_user.set_password(newpassword)
 			cur_user.save()
 			messages.success(self.request, 'Password Update Successfully.')
-			return super().form_valid(form);
+			return super().form_valid(form)
 		else:
-			messages.error(self.request, 'Wrong password.')
+			form.add_error('oldpassword', 'Wrong password.')
 			return super().form_invalid(form);
 
-	def form_invalid(self, form):
-		messages.error(self.request, form.non_field_errors()[0])
-		return super().form_invalid(form);
 
 	def get_success_url(self):
 		return reverse('customauth:login')

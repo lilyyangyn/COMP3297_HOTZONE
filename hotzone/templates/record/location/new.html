@@ -9,14 +9,23 @@
 {% block form_card_body %}
 <form action="{% url 'records:location-query' %}" method="POST">
   {% csrf_token %}
-  <div class="input-group" style="margin-bottom: 25px">
-    <div class="input-group-prepend">
-      <span class="input-group-text"><i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp&nbspName</span>
+  <div class="form-input">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp&nbspName</span>
+      </div>
+    	{{ search_form.name | add_class:"form-control" }}
+      <div class="input-group-append">
+        <span class="input-group-text" style="height:40px;"><input class="btn" type="submit" value="Search" /></span>
+      </div>
     </div>
-  	{{ search_form.name | add_class:"form-control" }}
-    <div class="input-group-append">
-      <span class="input-group-text" style="height:40px;"><input class="btn" type="submit" value="Search" /></span>
+    {% if search_form.name.errors %}
+    <div class="form-input-errors">
+        {% for msg in search_form.name.errors %}
+        <i>* {{ msg }} </i>
+        {% endfor %}
     </div>
+    {% endif %}
   </div>
 </form>
 

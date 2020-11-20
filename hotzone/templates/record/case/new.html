@@ -7,48 +7,93 @@
 {% block form_card_title %}New Case{% endblock %}
 
 {% block form_card_form_body %}
-<div class="input-group" style="margin-bottom: 25px">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp&nbspCase Number</span>
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp&nbspCase Number</span>
+    </div>
+  	{{ form.caseNumber | add_class:"form-control" }}
   </div>
-	{{ form.caseNumber | add_class:"form-control" }}
+  {% if form.caseNumber.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.caseNumber.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
+  </div>
+  {% endif %}
 </div>
 
-<div class="input-group" style="margin-bottom: 25px">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp&nbspPatient</span>
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp&nbspPatient</span>
+    </div>
+  	{{ form.patient | add_class:"form-control" }}
+    <div class="input-group-append">
+        <span class="input-group-text" style="height:40px;"><a href="{% url 'records:patient-new' %}" target="_blank"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></span>
+    </div>
   </div>
-	{{ form.patient | add_class:"form-control" }}
-  <div class="input-group-append">
-      <span class="input-group-text" style="height:40px;"><a href="{% url 'records:patient-new' %}" target="_blank"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></span>
+  {% if form.patient.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.patient.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
   </div>
+  {% endif %}
 </div>
 
-<div class="input-group" style="margin-bottom: 25px">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-snowflake-o" aria-hidden="true"></i>&nbsp&nbspVirus</span>
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-snowflake-o" aria-hidden="true"></i>&nbsp&nbspVirus</span>
+    </div>
+  	{{ form.virus | add_class:"form-control" }}
+    <div class="input-group-append">
+        <span class="input-group-text" style="height:40px;"><a href="{% url 'records:virus-new' %}" target="_blank"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></span>
+    </div>
   </div>
-	{{ form.virus | add_class:"form-control" }}
-  <div class="input-group-append">
-      <span class="input-group-text" style="height:40px;"><a href="{% url 'records:virus-new' %}" target="_blank"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></span>
+  {% if form.virus.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.virus.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
   </div>
+  {% endif %}
 </div>
 
-<div class="input-group" style="margin-bottom: 25px">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp&nbspDate Confirmed</span>
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp&nbspDate Confirmed</span>
+    </div>
+    {{ form.date | add_class:"form-control" }}
+    <div class="input-group-prepend">
+      <span class="input-group-text">Format: YYYY-MM-DD</span>
+    </div>
   </div>
-  {{ form.date | add_class:"form-control" }}
-  <div class="input-group-prepend">
-    <span class="input-group-text">Format: YYYY-MM-DD</span>
+  {% if form.date.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.date.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
   </div>
+  {% endif %}
 </div>
 
-<div class="input-group" style="margin-bottom: 25px">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp&nbspOriginal From</span>
+<div class="form-input">
+  <div class="input-group" style="margin-bottom: 25px">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp&nbspOriginal From</span>
+    </div>
+    {{ form.origin | add_class:"form-control" }}
   </div>
-  {{ form.origin | add_class:"form-control" }}
+  {% if form.origin.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.origin.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
+  </div>
+  {% endif %}
 </div>
 
 <div class="controls">

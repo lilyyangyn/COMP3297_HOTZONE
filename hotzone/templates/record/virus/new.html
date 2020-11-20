@@ -7,25 +7,52 @@
 {% block form_card_title %}New Virus{% endblock %}
 
 {% block form_card_form_body %}
-<div class="input-group" style="margin-bottom: 25px">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp&nbspName</span>
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp&nbspName</span>
+    </div>
+  	{{ form.name | add_class:"form-control" }}
   </div>
-	{{ form.name | add_class:"form-control" }}
+  {% if form.name.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.name.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
+  </div>
+  {% endif %}
 </div>
 
-<div class="input-group" style="margin-bottom: 25px">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp&nbspCommon Name</span>
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp&nbspCommon Name</span>
+    </div>
+  	{{ form.commonName | add_class:"form-control" }}
   </div>
-	{{ form.commonName | add_class:"form-control" }}
+  {% if form.commonName.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.commonName.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
+  </div>
+  {% endif %}
 </div>
 
-<div class="input-group" style="margin-bottom: 25px">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp&nbspMax. Infection Period</span>
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp&nbspMax. Infection Period</span>
+    </div>
+  	{{ form.maxPeriod | add_class:"form-control" }}
   </div>
-	{{ form.maxPeriod | add_class:"form-control" }}
+  {% if form.maxPeriod.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.maxPeriod.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
+  </div>
+  {% endif %}
 </div>
 
 <div class="controls">

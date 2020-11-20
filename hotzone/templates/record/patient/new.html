@@ -7,28 +7,55 @@
 {% block form_card_title %}New Patient{% endblock %}
 
 {% block form_card_form_body %}
-<div class="input-group" style="margin-bottom: 25px">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp&nbspName</span>
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp&nbspName</span>
+    </div>
+  	{{ form.name | add_class:"form-control" }}
   </div>
-	{{ form.name | add_class:"form-control" }}
+  {% if form.name.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.name.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
+  </div>
+  {% endif %}
 </div>
 
-<div class="input-group" style="margin-bottom: 25px">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-id-card" aria-hidden="true"></i>&nbsp&nbspHKID</span>
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-id-card" aria-hidden="true"></i>&nbsp&nbspHKID</span>
+    </div>
+  	{{ form.identity | add_class:"form-control" }}
   </div>
-	{{ form.identity | add_class:"form-control" }}
+  {% if form.identity.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.identity.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
+  </div>
+  {% endif %}
 </div>
 
-<div class="input-group" style="margin-bottom: 25px">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-birthday-cake" aria-hidden="true"></i>&nbsp&nbspDate of Birth</span>
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-birthday-cake" aria-hidden="true"></i>&nbsp&nbspDate of Birth</span>
+    </div>
+  	{{ form.birth | add_class:"form-control" }}
+    <div class="input-group-prepend">
+      <span class="input-group-text">Format: YYYY-MM-DD</span>
+    </div>
   </div>
-	{{ form.birth | add_class:"form-control" }}
-  <div class="input-group-prepend">
-    <span class="input-group-text">Format: YYYY-MM-DD</span>
+  {% if form.birth.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.birth.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
   </div>
+  {% endif %}
 </div>
 
 <div class="controls">

@@ -7,28 +7,47 @@
 {% block form_card_title %}Wellcome to HotZone{% endblock %}
 
 {% block form_card_form_body %}
-<div class="input-group" style="margin-bottom: 25px">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp&nbspUsername</span>
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp&nbspUsername</span>
+    </div>
+  	{{ form.username | add_class:"form-control" }}
   </div>
-	{{ form.username | add_class:"form-control" }}
+  {% if form.username.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.username.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
+  </div>
+  {% endif %}
 </div>
 
-<div class="input-group" style="margin-bottom: 25px">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i>&nbsp&nbspPassword</span>
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i>&nbsp&nbspPassword</span>
+    </div>
+    {{ form.password | add_class:"form-control" }}
   </div>
-  {{ form.password | add_class:"form-control" }}
-
+  {% if form.password.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.password.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
+  </div>
+  {% endif %}
 </div>
 
-<div class="input-group" style="margin-bottom: 25px;">
-	<div class="mr-auto" style="float:left;margin-left: 10px">
-		{{ form.remember_me }}
-     <span style="font-size: 14px;font-weight: normal;">Remember Me</span>
-  </div>
-  <div class="ml-auto" style="float:right;margin-right: 10px">
-    <a href="{% url 'customauth:forget-pwd' %}"><span style="font-size: 14px;font-weight: normal">Forget Password</span></a>
+<div class="form-input">
+  <div class="input-group" style="margin-bottom: 25px;">
+  	<div class="mr-auto" style="float:left;margin-left: 10px">
+  		{{ form.remember_me }}
+       <span style="font-size: 14px;font-weight: normal;">Remember Me</span>
+    </div>
+    <div class="ml-auto" style="float:right;margin-right: 10px">
+      <a href="{% url 'customauth:forget-pwd' %}"><span style="font-size: 14px;font-weight: normal">Forget Password</span></a>
+    </div>
   </div>
 </div>
 

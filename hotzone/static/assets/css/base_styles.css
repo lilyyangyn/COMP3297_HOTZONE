@@ -59,9 +59,11 @@ div.container-fluid{
 }
 
 /* form */
-.form-validate_error{
-  color:#E53935;
-  font-size:12px;
+.form-input{
+  margin-bottom: 25px;
+}
+.form-input-errors{
+  color:red;
 }
 
 /* index filter form */

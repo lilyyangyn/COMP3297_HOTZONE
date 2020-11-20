@@ -47,6 +47,7 @@ class PasswordForm(forms.Form):
 		confirm_password = cleaned_data.get("newpassword2")
 
 		if password != confirm_password:
+			self.add_error('newpassword2', "Two passwords not match.")
 			raise forms.ValidationError("Two passwords not match.")
 
 		return cleaned_data

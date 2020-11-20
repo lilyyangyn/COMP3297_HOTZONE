@@ -7,12 +7,20 @@
 {% block form_card_title %}Please Input Your Reserved Email{% endblock %}
 
 {% block form_card_form_body %}
-{% csrf_token %}
-<div class="input-group" style="margin-bottom: 25px">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-  </div>
-  {{ form.email_addr | add_class:"form-control" }}
+<div class="form-input">
+	<div class="input-group" style="margin-bottom: 25px">
+	  <div class="input-group-prepend">
+	    <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+	  </div>
+	  {{ form.email_addr | add_class:"form-control" }}
+	</div>
+	{% if form.email_addr.errors %}
+	<div class="form-input-errors">
+	    {% for msg in form.email_addr.errors %}
+	    <i>* {{ msg }} </i>
+	    {% endfor %}
+	</div>
+	{% endif %}
 </div>
 
 <div class="controls">

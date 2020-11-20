@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import MinValueValidator
+from decimal import Decimal
 
 # Patients diagnosed with the disease
 class Patient(models.Model):
@@ -15,7 +17,8 @@ class Virus(models.Model):
  	commonName = models.CharField(max_length=64)		# common name (of associated disease)
  	maxPeriod = models.DecimalField(
  		max_digits=2,
- 		decimal_places=0
+ 		decimal_places=0,
+ 		validators=[MinValueValidator(Decimal('0'))]
  	)													# max. infectious period (before a case confirmed as infected and isolated)
  	
  	def __str__(self):
