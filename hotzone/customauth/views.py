@@ -9,6 +9,7 @@ from django.contrib import messages
 from urllib import parse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib import auth
 
 class LoginView(FormView):
 	template_name = 'auth/login.html'
@@ -67,8 +68,27 @@ class ResetPwdView(FormView):
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
 
+	def form_valid(self, form):
+		old_password = form.cleaned_data['oldpassword']
+		username = self.request.user.username
+		cur_user = auth.authenticate(username=username, password=old_password)
+		if cur_user is not None and cur_user.is_active:
+			print("HHHHHHHHHHH")
+			newpassword = form.cleaned_data['newpassword1']
+			cur_user.set_password(newpassword)
+			cur_user.save()
+			messages.success(self.request, 'Password Update Successfully.')
+			return super().form_valid(form);
+		else:
+			messages.error(self.request, 'Wrong password.')
+			return super().form_invalid(form);
+
+	def form_invalid(self, form):
+		messages.error(self.request, form.non_field_errors()[0])
+		return super().form_invalid(form);
+
 	def get_success_url(self):
-		return reverse('customauth:pwd-complete')
+		return reverse('customauth:login')
 
 class EmailSentView(TemplateView):
 	template_name = 'auth/sent_email.html'

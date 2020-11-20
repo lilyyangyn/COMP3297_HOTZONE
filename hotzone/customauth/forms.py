@@ -22,25 +22,31 @@ class EmailForm(forms.Form):
 		pass
 
 class PasswordForm(forms.Form):
-	new_password = forms.CharField(
+	oldpassword = forms.CharField(
 		widget=forms.PasswordInput(),
 		required=True,
-		error_messages={
-			'required': 'Please enter your password',
-		})
-	new_password_confirm = forms.CharField(
-		widget=forms.PasswordInput(),
-		required=True,
-		error_messages={
-			'required': 'Please enter your password',
-		})
+		label=u"Old password",
+		error_messages={'required': u'Please input your old password'},
+	)
+	newpassword1 = forms.CharField(
+        required=True,
+        label=u"New password",
+        error_messages={'required': u'Please input your new password'},
+        widget=forms.PasswordInput(),
+    )
+	newpassword2 = forms.CharField(
+        required=True,
+        label=u"Confirm password",
+        error_messages={'required': u'Please input your new password again'},
+        widget=forms.PasswordInput(),
+    )
 
 	def clean(self):
 		cleaned_data = super().clean()
-		password = cleaned_data.get("new_password")
-		confirm_password = cleaned_data.get("new_password_confirm")
+		password = cleaned_data.get("newpassword1")
+		confirm_password = cleaned_data.get("newpassword2")
 
 		if password != confirm_password:
-			raise forms.ValidationError(
-				"Password and confirm_password does not match"
-				)
+			raise forms.ValidationError("Two passwords not match.")
+
+		return cleaned_data
