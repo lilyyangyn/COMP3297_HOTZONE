@@ -47,7 +47,7 @@ EMAIL_HOST_PASSWORD = 'Kmcsr199871'
 INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'records.apps.RecordsConfig',
-    #'customauth.apps.CustomauthConfig',
+    'customauth.apps.CustomauthConfig',
     'bootstrap4',
     'widget_tweaks',
     'environs',
@@ -103,11 +103,11 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '',
     },
-    #'prod': env.dj_db_url('DATABASE_URL'),
+    'prod': env.dj_db_url('DATABASE_URL'),
 }
 
 # customized user model
-#AUTH_USER_MODEL = 'customauth.Staff'
+AUTH_USER_MODEL = 'customauth.Staff'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

@@ -7,7 +7,12 @@
 <div class="page-header col-xs-12 col-lg-12 text-center" style="margin-top:30px">
 	<img style="margin-top:50px; height:88px;" src="{% static '/assets/images/checkmark.png' %}">
 	<br><br>
-    <h1>Password Update Successfully</h1>
-    <a ref="{% url 'customauth:login' %}">
+    <h1>Your Password Has Been Set</h1>
+    <br>
+    <p style="font-size: 18px">You may go ahead and <a href="{% url 'customauth:login' %}">login</a> now.</p>
+    
 </div>
+
+
+
 {% endblock %}

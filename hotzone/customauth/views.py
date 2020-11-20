@@ -10,6 +10,7 @@ from urllib import parse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
+from django.contrib.auth import views as auth_views 
 
 class LoginView(FormView):
 	template_name = 'auth/login.html'
@@ -54,13 +55,6 @@ class LogoutView(View):
 			messages.success(request, 'Logout Successfully.')
 		return HttpResponseRedirect(reverse('customauth:login'))
 
-class ForgetPwdView(FormView):
-	template_name = 'auth/forget_pwd.html'
-	form_class = EmailForm
-	
-	def get_success_url(self):
-		return reverse('customauth:email-sent')
-
 class ResetPwdView(FormView):
 	template_name = 'auth/reset_pwd.html'
 	form_class = PasswordForm
@@ -83,14 +77,7 @@ class ResetPwdView(FormView):
 			form.add_error('oldpassword', 'Wrong password.')
 			return super().form_invalid(form);
 
-
 	def get_success_url(self):
 		return reverse('customauth:login')
-
-class EmailSentView(TemplateView):
-	template_name = 'auth/sent_email.html'
-
-class PwdCompleteView(TemplateView):
-	template_name = 'auth/complete.html'
 
 

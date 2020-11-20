@@ -1,0 +1,63 @@
+{% extends 'form.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Reset Password | HotZone{% endblock %}
+
+{% block form_card_title %}
+	{% if form %}
+		Enter Your New Password Twice For Verification
+	{% else %}
+		Password Reset Unsuccessful
+	{% endif %}
+{% endblock %}
+
+{% block form_card_body %}
+{% if form %}
+ <form method="POST">
+ 	{% csrf_token %}
+	 <div class="form-input">
+		<div class="input-group">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i>&nbsp&nbspNew Password</span>
+		  </div>
+			{{ form.new_password1 | add_class:"form-control" }}
+		</div>
+		{% if form.new_password1.errors %}
+		<div class="form-input-errors">
+		    {% for msg in form.new_password1.errors %}
+		    <i>* {{ msg }} </i>
+		    {% endfor %}
+		</div>
+		{% endif %}
+	</div>
+
+	<div class="form-input">
+		<div class="input-group">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i>&nbsp&nbspConfirm Password</span>
+		  </div>
+			{{ form.new_password2 | add_class:"form-control" }}
+		</div>
+		{% if form.new_password2.errors %}
+		<div class="form-input-errors">
+		    {% for msg in form.new_password2.errors %}
+		    <i>* {{ msg }} </i>
+		    {% endfor %}
+		</div>
+		{% endif %}
+	</div>
+
+	<div class="controls">
+	  <input class="btn btn-danger btn-block" type="submit" value="Submit" />
+	</div>
+</form>
+{% else %}
+<div class="text-center" style="font-size: 18px">
+	<p>The password reset link was invalid, possibly because it has already been used</p>
+	<p>Please request a new password reset.</p>
+	<br>
+	<button type="button" class="btn btn-danger btn-block" onclick="location.href='{% url 'home:homepage' %}'">Menu</button>
+</div>
+{% endif %}
+{% endblock %}
