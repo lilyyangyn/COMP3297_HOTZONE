@@ -12,15 +12,8 @@
 	  <div class="input-group-prepend">
 	    <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
 	  </div>
-	  {{ form.email_addr | add_class:"form-control" }}
+	  {{ form }}
 	</div>
-	{% if form.email_addr.errors %}
-	<div class="form-input-errors">
-	    {% for msg in form.email_addr.errors %}
-	    <i>* {{ msg }} </i>
-	    {% endfor %}
-	</div>
-	{% endif %}
 </div>
 
 <div class="controls">
