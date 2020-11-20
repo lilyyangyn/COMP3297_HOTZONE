@@ -43,6 +43,7 @@ class LoginView(FormView):
 		if form.is_valid():
 			return self.form_valid(form)
 		else:
+			messages.error(self.request, 'Login fails.')
 			form.add_error('password', 'Please enter the correct username and password.')
 			return self.form_invalid(form)
 
