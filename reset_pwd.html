@@ -1,0 +1,30 @@
+{% extends 'form.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Reset Password | HotZone{% endblock %}
+
+{% block form_card_title %}Enter Your New Password{% endblock %}
+
+{% block form_card_form_body %}
+
+<div class="form-wrapper" style="margin-bottom: 25px">
+  <form method="post" action="" enctype="multipart/form-data">
+    {% csrf_token%}  
+    {% for field in form%}
+      <div class="fieldWarpper" style="margin-bottom: 25px">
+        {{ field.label_tag }}{{ field }}
+      </div>
+    {% endfor %}
+    {{form.non_field_errors}}
+    {% if message %}
+      {{message}}
+    {% endif %}
+    
+    <div class="button-wrapper sumbit">
+      <input type="submit" value="Submit"/>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
