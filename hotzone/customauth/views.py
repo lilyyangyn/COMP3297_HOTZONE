@@ -77,7 +77,7 @@ class ResetPwdView(FormView):
 			newpassword = form.cleaned_data['newpassword1']
 			cur_user.set_password(newpassword)
 			cur_user.save()
-			messages.success(self.request, 'Password Update Successfully.')
+			messages.success(self.request, 'Password Updated Successfully.')
 			return super().form_valid(form)
 		else:
 			form.add_error('oldpassword', 'Wrong password.')
