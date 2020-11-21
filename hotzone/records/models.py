@@ -60,7 +60,7 @@ class Case(models.Model):
 		(IMPORTED, 'Imported'),
 	)
 	origin = models.CharField(
-		max_length=3, 
+		max_length=8, 
 		choices=CASE_ORIGIN_CHOICE
 	)													# origin: Local / Imported
 
@@ -89,7 +89,7 @@ class Visit(models.Model):
 		(VISIT, 'Visit'),
 	)
 	category = models.CharField(
-		max_length=2,
+		max_length=10,
 		choices=VISIT_CATEGORY_CHOICE
 	)													# category: Residence, Workplace, Visit
 
