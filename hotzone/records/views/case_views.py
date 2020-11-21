@@ -11,6 +11,15 @@ class CaseAllView(CustomizedListView):
 		caseNumber = self.request.GET.get('qcaseid')
 		if caseNumber:
 			filters['caseNumber'] = caseNumber.strip()
+		patientName = self.request.GET.get('qpatient')
+		if patientName:
+			filters['patient__name'] = patientName.strip()
+		virusName = self.request.GET.get('qvirus')
+		if virusName:
+			filters['virus__name'] = virusName.strip()
+		comfirmedSince = self.request.GET.get('qcsince')
+		if comfirmedSince:
+			filters['date__gte'] = comfirmedSince.strip()
 		return filters
 
 class CaseShowView(CustomizedShowView):
