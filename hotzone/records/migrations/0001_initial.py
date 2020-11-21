@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('caseNumber', models.CharField(max_length=32)),
                 ('date', models.DateField()),
-                ('origin', models.CharField(choices=[('LOC', 'Local'), ('IMP', 'Imported')], max_length=3)),
+                ('origin', models.CharField(choices=[('LOC', 'Local'), ('IMP', 'Imported')], max_length=8)),
             ],
         ),
         migrations.CreateModel(
@@ -55,7 +55,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('dateFrom', models.DateField()),
                 ('dateTo', models.DateField()),
-                ('category', models.CharField(choices=[('RE', 'Residence'), ('WO', 'Workplace'), ('VI', 'Visit')], max_length=2)),
+                ('category', models.CharField(choices=[('RE', 'Residence'), ('WO', 'Workplace'), ('VI', 'Visit')], max_length=10)),
                 ('case', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='records.case')),
                 ('location', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='records.location')),
             ],
