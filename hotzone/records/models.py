@@ -53,8 +53,8 @@ class Case(models.Model):
 	)													# infecting virus
 	date = models.DateField()
 
-	LOCAL = 'LOC'
-	IMPORTED = 'IMP'
+	LOCAL = 'Local'
+	IMPORTED = 'Imported'
 	CASE_ORIGIN_CHOICE = (
 		(LOCAL, 'Local'),
 		(IMPORTED, 'Imported'),
@@ -80,9 +80,9 @@ class Visit(models.Model):
 	dateFrom = models.DateField()						# dates from which the patient was present at the location
 	dateTo = models.DateField()							# dates to which the patient was present at the location
 
-	RESIDENCE = 'RE'
-	WORKPLACE = 'WO'
-	VISIT = 'VI'
+	RESIDENCE = 'Residence'
+	WORKPLACE = 'Workplace'
+	VISIT = 'Visit'
 	VISIT_CATEGORY_CHOICE = (
 		(RESIDENCE, 'Residence'),
 		(WORKPLACE, 'Workplace'),
