@@ -14,6 +14,16 @@ class LocationAllView(CustomizedListView):
 	template_name = "record/location/index.html"
 	model = Location
 
+	def get_filters(self):
+		filters = {}
+		name = self.request.GET.get('qname')
+		if name:
+			filters['name'] = name.strip()
+		address = self.request.GET.get('qaddr')
+		if address:
+			filters['address'] = address.strip()
+		return filters
+
 class LocationShowView(CustomizedShowView):
 	template_name = "record/location/show.html"
 	model = Location
@@ -33,6 +43,7 @@ class LocationCreateMainView(TemplateView):
 	def get(self, request, *args, **kwargs):
 		locName = self.request.session.get('query_loc')
 		dataList = []
+		# Get the data from Geo DataBase
 		if request.session.get('data_list'):
 			for data in request.session.get('data_list'):
 				name = data['nameEN'] if data['nameEN'] else locName
@@ -50,12 +61,18 @@ class LocationCreateMainView(TemplateView):
 		context = self.get_context_data(**kwargs)
 		context['data_list'] = dataList
 
+		locInDB = None
+		if locName:
+			locInDB = Location.objects.filter(name=locName).all()
+			print(locInDB)
+			context['dbloc_list'] = locInDB
+
 		search_form = LocationQueryForm(self.request.GET or None)
 		if locName:
 			search_form.fields['name'].initial = locName
 		context['search_form'] = search_form
 
-		if dataList:
+		if locInDB or dataList:
 			create_form = LocationCreateForm(request.GET or None)
 			context['create_form'] = create_form
 
@@ -71,21 +88,34 @@ class LocationCreateView(CustomizedCreateView):
 	template_name = "record/location/new.html"
 	form_class = LocationCreateForm
 	model = Location
-	success_notice = 'Data saved. Creation successfully.'
-	error_notice = 'Something is wrong. Creation fails.'
 
 	def get_success_url(self):
 		return reverse('records:location-show', kwargs={'id': self.kwargs['id']})
 
+	def get_duplication_url(self):
+		return reverse('records:location-show', kwargs={'id': self.kwargs['id']})
+
 	def form_valid(self, form):
 		submit_location = eval(form.data['location'])
-		print(submit_location)
-		print(submit_location['name'])
-		location = self.model(
-				name = submit_location['name'],
-				XCoord = submit_location['XCoord'],
-				YCoord = submit_location['YCoord'],
-			)
+		dp_flag = False
+		try:
+			duplicate = self.model.objects.filter(
+				name=submit_location['name'],
+				XCoord=submit_location['XCoord'],
+				YCoord=submit_location['YCoord']).first()
+		except self.model.DoesNotExist:
+			pass
+		if not duplicate:
+			location = self.model(
+					name = submit_location['name'],
+					XCoord = submit_location['XCoord'],
+					YCoord = submit_location['YCoord'],
+				)
+		else:
+			self.kwargs['id'] = duplicate.pk
+			messages.info(self.request,self.duplication_notice)
+			return HttpResponseRedirect(self.get_duplication_url())
+
 		if submit_location['address']:		# query succeeds
 			setattr(location, 'address', submit_location['address'])
 
@@ -148,7 +178,6 @@ class LocationQueryView(FormView):
 		return HttpResponseRedirect(reverse('records:location-new'))
 
 class LocationDeleteView(CustomizedDeleteView):
-	success_message = 'Delete Successfully.'
 	model = Location
 
 	def get_success_url(self):

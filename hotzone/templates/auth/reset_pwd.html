@@ -1,0 +1,61 @@
+{% extends 'form.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Reset Password | HotZone{% endblock %}
+
+{% block form_card_title %}Enter Your New Password{% endblock %}
+
+{% block form_card_form_body %}
+<div class="form-input">
+	<div class="input-group">
+	  <div class="input-group-prepend">
+	    <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i>&nbsp&nbspOld Password</span>
+	  </div>
+		{{ form.oldpassword | add_class:"form-control" }}
+	</div>
+	{% if form.oldpassword.errors %}
+	<div class="form-input-errors">
+	    {% for msg in form.oldpassword.errors %}
+	    <i>* {{ msg }} </i>
+	    {% endfor %}
+	</div>
+	{% endif %}
+</div>
+
+<div class="form-input">
+	<div class="input-group">
+	  <div class="input-group-prepend">
+	    <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i>&nbsp&nbspNew Password</span>
+	  </div>
+		{{ form.newpassword1 | add_class:"form-control" }}
+	</div>
+	{% if form.newpassword1.errors %}
+	<div class="form-input-errors">
+	    {% for msg in form.newpassword1.errors %}
+	    <i>* {{ msg }} </i>
+	    {% endfor %}
+	</div>
+	{% endif %}
+</div>
+
+<div class="form-input">
+	<div class="input-group">
+	  <div class="input-group-prepend">
+	    <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i>&nbsp&nbspConfirm Password</span>
+	  </div>
+		{{ form.newpassword2 | add_class:"form-control" }}
+	</div>
+	{% if form.newpassword2.errors %}
+	<div class="form-input-errors">
+	    {% for msg in form.newpassword2.errors %}
+	    <i>* {{ msg }} </i>
+	    {% endfor %}
+	</div>
+	{% endif %}
+</div>
+
+<div class="controls">
+  <input class="btn btn-danger btn-block" type="submit" value="Submit" />
+</div>
+{% endblock %}

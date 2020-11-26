@@ -11,7 +11,7 @@
 </tr>
 <tr>
 	<td>Address</td>
-	<td>{{ location.address }}</td>
+	<td>{% if location.address %}{{ location.address }}{% endif %}</td>
 </tr>
 <tr>
 	<td>X-Coordinate</td>

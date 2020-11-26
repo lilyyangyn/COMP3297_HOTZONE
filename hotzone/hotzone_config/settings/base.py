@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 from environs import Env
 env = Env()
@@ -24,12 +24,22 @@ env.read_env()
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('HOTZONE_SECRET_KEY')
+#SECRET_KEY = env('HOTZONE_SECRET_KEY')
+SECRET_KEY = '3!i4qm6vj$-4cbsf^ii27b3_@c-$u3(uayj+rm=&ooefcbdqld'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('HOTZONE_DEBUG', defulat=False)
+DEBUG = env.bool('HOTZONE_DEBUG', default=True)
 
 ALLOWED_HOSTS = ['dry-mesa-46974.herokuapp.com', 'localhost', '127.0.0.1']
+
+# Add Email smtp configuration
+EMAIL_BACKEND   = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST      = 'smtp.163.com'
+EMAIL_PORT      = 465
+EMAIL_USE_SSL   = True
+EMAIL_HOST_USER = 'hotzone3297@163.com'
+EMAIL_HOST_PASSWORD =  'MGMFZPWLLWBZNGQL'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 # Application definition
@@ -37,7 +47,7 @@ ALLOWED_HOSTS = ['dry-mesa-46974.herokuapp.com', 'localhost', '127.0.0.1']
 INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'records.apps.RecordsConfig',
-    #'customauth.apps.CustomauthConfig',
+    'customauth.apps.CustomauthConfig',
     'bootstrap4',
     'widget_tweaks',
     'environs',
@@ -85,19 +95,19 @@ WSGI_APPLICATION = 'hotzone_config.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': env.dj_db_url('DATABASE_URL'),
     'dev': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'hotzone',
         'USER': 'chp',
         'PASSWORD': 'CHPPASSWORD',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '',
     },
+    'prod': env.dj_db_url('DATABASE_URL'),
 }
 
 # customized user model
-#AUTH_USER_MODEL = 'customauth.Staff'
+AUTH_USER_MODEL = 'customauth.Staff'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -118,7 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # login url
-LOGIN_URL = '/admin/login'
+LOGIN_URL = '/login'
 
 
 # Internationalization
@@ -138,7 +148,3 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
-STATIC_ROOT=str(BASE_DIR.joinpath('static'))

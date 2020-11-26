@@ -11,6 +11,10 @@ class CustomizedListView(ListView):
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
 
+	def get_queryset(self):
+		object_list = self.model.objects.filter(**self.get_filters())
+		return object_list
+
 class CustomizedShowView(TemplateView):
 	@method_decorator(login_required)
 	def dispatch(self, *args, **kwargs):
@@ -23,6 +27,10 @@ class CustomizedShowView(TemplateView):
 		return context
 
 class CustomizedCreateView(CreateView):
+	success_notice = 'Data saved. Creation successfully.'
+	error_notice = 'Something is wrong. Creation fails.'
+	duplication_notice = 'The Entry already exist.'
+
 	@method_decorator(login_required)
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
@@ -39,6 +47,10 @@ class CustomizedCreateView(CreateView):
 		return super().form_invalid(form)
 
 class CustomizedEditView(UpdateView):
+	success_notice_changed = 'Data saved. Edit successfully.'
+	success_notice_unchanged = 'Data saved. Nothing has changed'
+	error_notice = 'Something is wrong. Edition fails.'
+
 	@method_decorator(login_required)
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
@@ -60,6 +72,8 @@ class CustomizedEditView(UpdateView):
 		return super().form_invalid(form)
 
 class CustomizedDeleteView(DeleteView):
+	success_message = 'Delete Successfully.'
+	
 	@method_decorator(login_required)
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)

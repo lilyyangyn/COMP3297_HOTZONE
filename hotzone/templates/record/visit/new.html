@@ -1,0 +1,119 @@
+{% extends 'form.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Visit Create | HotZone{% endblock %}
+
+{% block form_card_title %}New Visit{% endblock %}
+
+{% block form_card_form_body %}
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp&nbspCase</span>
+    </div>
+  	{{ form.case | add_class:"form-control" }}
+  </div>
+  {% if form.case.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.case.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp&nbspLocation</span>
+    </div>
+    {{ form.location | add_class:"form-control" }}
+    <div class="input-group-append">
+      <span class="input-group-text"><a href="{% url 'records:location-new' %}" target="_blank"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></span>
+    </div>
+  </div>
+  {% if form.location.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.location.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>&nbsp&nbspDate From</span>
+    </div>
+  	{{ form.dateFrom | add_class:"form-control" }}
+    <div class="input-group-prepend">
+      <span class="input-group-text">Format: YYYY-MM-DD</span>
+    </div>
+  </div>
+  {% if form.dateFrom.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.dateFrom.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i>&nbsp&nbspDate To</span>
+    </div>
+    {{ form.dateTo | add_class:"form-control" }}
+    <div class="input-group-prepend">
+      <span class="input-group-text">Format: YYYY-MM-DD</span>
+    </div>
+  </div>
+  {% if form.dateTo.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.dateTo.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<div class="form-input">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp&nbspCategory</span>
+    </div>
+    {{ form.category | add_class:"form-control" }}
+  </div>
+  {% if form.category.errors %}
+  <div class="form-input-errors">
+      {% for msg in form.category.errors %}
+      <i>* {{ msg }} </i>
+      {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<div class="controls">
+  <input class="btn btn-danger btn-block" type="submit" value="Save" />
+</div>
+{% endblock %}
+
+{% block bootstrap4_extra_script %}
+{{ block.super }}
+<script type="text/javascript">
+  var time = new Date().getTime();
+  $(document.body).bind("mousemove keypress",function(e){
+    time = new Date().getTime();
+  });
+  function refresh(){
+    if(new Date().getTime()-time>= 10000)
+      window.location.reload(true);
+    else
+      setTimeout(refresh,5000)
+  }
+  setTimeout(refresh,5000);
+</script>
+{% endblock %}

@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import MinValueValidator
+from decimal import Decimal
 
 # Patients diagnosed with the disease
 class Patient(models.Model):
@@ -15,7 +17,8 @@ class Virus(models.Model):
  	commonName = models.CharField(max_length=64)		# common name (of associated disease)
  	maxPeriod = models.DecimalField(
  		max_digits=2,
- 		decimal_places=0
+ 		decimal_places=0,
+ 		validators=[MinValueValidator(Decimal('0'))]
  	)													# max. infectious period (before a case confirmed as infected and isolated)
  	
  	def __str__(self):
@@ -50,14 +53,14 @@ class Case(models.Model):
 	)													# infecting virus
 	date = models.DateField()
 
-	LOCAL = 'LOC'
-	IMPORTED = 'IMP'
+	LOCAL = 'Local'
+	IMPORTED = 'Imported'
 	CASE_ORIGIN_CHOICE = (
 		(LOCAL, 'Local'),
 		(IMPORTED, 'Imported'),
 	)
 	origin = models.CharField(
-		max_length=3, 
+		max_length=8, 
 		choices=CASE_ORIGIN_CHOICE
 	)													# origin: Local / Imported
 
@@ -77,16 +80,16 @@ class Visit(models.Model):
 	dateFrom = models.DateField()						# dates from which the patient was present at the location
 	dateTo = models.DateField()							# dates to which the patient was present at the location
 
-	RESIDENCE = 'RE'
-	WORKPLACE = 'WO'
-	VISIT = 'VI'
+	RESIDENCE = 'Residence'
+	WORKPLACE = 'Workplace'
+	VISIT = 'Visit'
 	VISIT_CATEGORY_CHOICE = (
 		(RESIDENCE, 'Residence'),
 		(WORKPLACE, 'Workplace'),
 		(VISIT, 'Visit'),
 	)
 	category = models.CharField(
-		max_length=2,
+		max_length=10,
 		choices=VISIT_CATEGORY_CHOICE
 	)													# category: Residence, Workplace, Visit
 

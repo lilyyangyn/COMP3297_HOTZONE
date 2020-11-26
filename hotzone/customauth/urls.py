@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from . import views
 
 app_name = 'customauth'
@@ -10,4 +11,9 @@ urlpatterns = [
 	path('logout',
 		views.LogoutView.as_view(),
 		name='logout'),
+
+	path('reset-password',
+		views.ResetPwdView.as_view(),
+		name='reset-pwd'),
+
 ]

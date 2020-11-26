@@ -6,6 +6,21 @@
 
 {% block index_content %}
 <h3>Total Patients: <span style="color:red;">{{ patient_list.all | length }}</span></h3>
+
+<br>
+
+<div class="data-filter">
+	<form method="get" class="text-center">
+	    <div>
+			<span>Name: </span><input type="text" name="qname">
+		</div>
+		<div>
+			<span>HKID: </span><input type="text" name="qid">
+		</div>
+		<input type="submit" value="Search">
+	</form>
+</div>
+
 <br>
 
 <table class="table text-center">
@@ -25,8 +40,6 @@
 			<td>{{ patient.identity }}</td>
 			<td>{{ patient.birth }}</td>
 			<td>
-				<a href="{% url 'records:patient-show' patient.pk %}">Show&nbsp<i class="fa fa-address-book-o" aria-hidden="true"></i></a>
-				&nbsp|&nbsp
 				<a href="{% url 'records:patient-edit' patient.pk %}">Edit&nbsp<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 				&nbsp|&nbsp
 				<a href="{% url 'records:patient-delete' patient.pk %}">Delete&nbsp<i class="fa fa-times" aria-hidden="true"></i></a>

@@ -1,0 +1,23 @@
+{% extends 'show.html' %}
+
+{% block title %}Virus Detail | HotZone{% endblock %}
+
+{% block detail_card_title %}Virus Detail{% endblock %}
+
+{% block detail_table_content %}
+<tr>
+	<td>Name</td>
+	<td>{{ virus.name }}</td>
+</tr>
+<tr>
+	<td>Common Name</td>
+	<td>{{ virus.commonName }}</td>
+</tr>
+<tr>
+	<td>Max. Infection Period</td>
+	<td>{{ virus.maxPeriod }}</td>
+</tr>
+{% endblock %}
+
+{% block detail_back_url %}{% url 'records:viruses' %}{% endblock %}
+{% block detail_edit_url %}{% url 'records:virus-edit' virus.pk %}{% endblock %}
