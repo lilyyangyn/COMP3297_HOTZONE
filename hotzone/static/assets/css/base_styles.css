@@ -85,3 +85,10 @@ div.container-fluid{
 .data-filter form div{
   margin-right:10px;
 }
+
+/* button */
+.line-cover-btn{
+  width: 100%;
+  text-align: left;
+}
+
