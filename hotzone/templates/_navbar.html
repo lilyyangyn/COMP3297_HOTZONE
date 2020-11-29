@@ -24,13 +24,8 @@
     			</ul>
     		</li>
 
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clustering</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li class="dropdown-item"><a href="{% url 'clustering:new' %}">New Clustering</a></li>
-                    <div class="dropdown-divider"></div>
-                    <li class="dropdown-item">Clusters</li>
-                </ul>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'clustering:new' %}">Clustering</a>
             </li>
 
             {% if user.is_superuser %}
