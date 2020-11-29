@@ -64,38 +64,46 @@
 {% if cluster_list %}
 <br><hr><br>
 
-<table class="table text-center">
-	<thead>
-		<tr>
-			<th>X</th>
-			<th>Y</th>
-			<th>Date</th>
-			<th>Day</th>
-			<th>Case</th>
-		</tr>
-	</thead>
 
-	<tbody>
-		{% for cluster in cluster_list %}
-		<tr class="seperator-line">
-			<td>Cluster no. {{ forloop.counter }} size: {{ cluster.size }}</td>
-		</tr>
-		{% for visit in cluster.visit_list %}
-		<tr>
-			<td>{{ visit.location.XCoord }}</td>
-			<td>{{ visit.locatio.YCoord }}</td>
-			<td>{{ visit.dateFrom }}</td>
-			<td>{{ visit.day }}</td>
-			<td>{{ visit.case.caseNumber }}</td>
-		</tr>
-		{% endfor %}
-		<tr>
-	       	<td><br></td>
-	    </tr>
-		{% endfor %}
-	</tbody>
-</table>
+{% for cluster in cluster_list %}
+<div id="accordion">
+	<div class="card">
+		<div class="card-header" id="heading{{ forloop.counter }}">
+			<h5 class="mb-0">
+				<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">
+					Cluster no. {{ forloop.counter }} size: {{ cluster.size }}
+				</button>
+			</h5>
+		</div>
+		<div id="collapse{{ forloop.counter }}" class="collapse" aria-labelledby="heading{{ forloop.counter }}" data-parent="#accordion">
+			<div class="card-body">
+				<table class="table text-center">
+					<thead>
+						<tr>
+							<th>X</th>
+							<th>Y</th>
+							<th>Date</th>
+							<th>Day</th>
+							<th>Case</th>
+						</tr>
+					</thead>
+					{% for visit in cluster.visit_list %}
+					<tr>
+						<td>{{ visit.location.XCoord }}</td>
+						<td>{{ visit.locatio.YCoord }}</td>
+						<td>{{ visit.dateFrom }}</td>
+						<td>{{ visit.day }}</td>
+						<td>{{ visit.case.caseNumber }}</td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}
 {% endif %}
+
 {% endblock %}
 
 {% block index_button_new %}{% endblock %}
