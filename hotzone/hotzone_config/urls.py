@@ -22,7 +22,8 @@ urlpatterns = [
     path('', include('home.urls')),
     path('', include('customauth.urls')),
     path('records/', include('records.urls')),
-    #path('accounts/',include("customauth.urls"))
+    path('clustering/', include('clustering.urls')),
+
     path('forget_pwd',
 	    auth_views.PasswordResetView.as_view(template_name="auth/forget_pwd.html"),
 		name='reset_password'),

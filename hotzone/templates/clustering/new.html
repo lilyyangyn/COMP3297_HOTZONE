@@ -1,0 +1,101 @@
+{% extends 'index.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}New Cluster | HotZone{% endblock %}
+
+{% block index_header %}New Cluster{% endblock %}
+
+{% block index_content %}
+<form method="GET">
+	<div class="form-input">
+	  <div class="input-group">
+	    <div class="input-group-prepend">
+	      <span class="input-group-text"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp&nbsp{{ form.distanceThres.label }}</span>
+	    </div>
+	  	{{ form.distanceThres | add_class:"form-control" }}
+	  </div>
+	  {% if form.distanceThres.errors %}
+	  <div class="form-input-errors">
+	      {% for msg in form.distanceThres.errors %}
+	      <i>* {{ msg }} </i>
+	      {% endfor %}
+	  </div>
+	  {% endif %}
+	</div>
+
+	<div class="form-input">
+	  <div class="input-group">
+	    <div class="input-group-prepend">
+	      <span class="input-group-text"><i class="fa fa-id-card" aria-hidden="true"></i>&nbsp&nbsp{{ form.timeThres.label }}</span>
+	    </div>
+	  	{{ form.timeThres | add_class:"form-control" }}
+	  </div>
+	  {% if form.timeThres.errors %}
+	  <div class="form-input-errors">
+	      {% for msg in form.timeThres.errors %}
+	      <i>* {{ msg }} </i>
+	      {% endfor %}
+	  </div>
+	  {% endif %}
+	</div>
+
+	<div class="form-input">
+	  <div class="input-group">
+	    <div class="input-group-prepend">
+	      <span class="input-group-text"><i class="fa fa-birthday-cake" aria-hidden="true"></i>&nbsp&nbsp{{ form.minSize.label }}</span>
+	    </div>
+	  	{{ form.minSize | add_class:"form-control" }}
+	  </div>
+	  {% if form.minSize.errors %}
+	  <div class="form-input-errors">
+	      {% for msg in form.minSize.errors %}
+	      <i>* {{ msg }} </i>
+	      {% endfor %}
+	  </div>
+	  {% endif %}
+	</div>
+
+	<div class="controls">
+	  <input class="btn btn-danger btn-block" type="submit" value="Start Clustering" />
+	</div>
+</form>
+
+{% if cluster_list %}
+<br><hr><br>
+
+<table class="table text-center">
+	<thead>
+		<tr>
+			<th>X</th>
+			<th>Y</th>
+			<th>Date</th>
+			<th>Day</th>
+			<th>Case</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% for cluster in cluster_list %}
+		<tr class="seperator-line">
+			<td>Cluster no. {{ forloop.counter }} size: {{ cluster.size }}</td>
+		</tr>
+		{% for visit in cluster.visit_list %}
+		<tr>
+			<td>{{ visit.location.XCoord }}</td>
+			<td>{{ visit.locatio.YCoord }}</td>
+			<td>{{ visit.dateFrom }}</td>
+			<td>{{ visit.day }}</td>
+			<td>{{ visit.case.caseNumber }}</td>
+		</tr>
+		{% endfor %}
+		<tr>
+	       	<td><br></td>
+	    </tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endif %}
+{% endblock %}
+
+{% block index_button_new %}{% endblock %}
