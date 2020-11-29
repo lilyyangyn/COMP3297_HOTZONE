@@ -66,5 +66,10 @@ class VisitEditView(CustomizedEditView):
 class VisitDeleteView(CustomizedDeleteView):
 	model = Visit
 
+	def get_object(self, queryset=None):
+		visit = get_object_or_404(self.model, pk=self.kwargs['id'])
+		self.caseId = visit.case.pk
+		return visit
+
 	def get_success_url(self):
-		return reverse('records:visits')
+		return reverse('records:visits', kwargs={'case':self.caseId})
