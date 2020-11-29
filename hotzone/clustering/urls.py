@@ -4,7 +4,7 @@ from . import views
 app_name = 'clustering'
 
 urlpatterns = [
-	path('new',
+	path('',
 		views.ClusterNewView.as_view(),
 		name='new'),
 
