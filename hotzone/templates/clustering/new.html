@@ -83,17 +83,15 @@
 							<th>X</th>
 							<th>Y</th>
 							<th>Date</th>
-							<th>Day</th>
 							<th>Case</th>
 						</tr>
 					</thead>
 					{% for visit in cluster.visit_list %}
 					<tr>
-						<td>{{ visit.location.XCoord }}</td>
-						<td>{{ visit.locatio.YCoord }}</td>
-						<td>{{ visit.dateFrom }}</td>
-						<td>{{ visit.day }}</td>
-						<td>{{ visit.case.caseNumber }}</td>
+						<td>{{ visit.x }}</td>
+						<td>{{ visit.y }}</td>
+						<td>{{ visit.date }}</td>
+						<td>{{ visit.caseNo }}</td>
 					</tr>
 					{% endfor %}
 				</table>
