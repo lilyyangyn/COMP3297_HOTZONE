@@ -36,7 +36,8 @@ class ClusterNewView(TemplateView):
 		context['cluster_list']=cluster_list
 		return self.render_to_response(context)
 
-	def custom_metric(self,q,p,space_eps,time_eps):
+	@staticmethod
+	def custom_metric(q,p,space_eps,time_eps):
 		dist=0
 		for i in range(2):
 			dist+=(q[i]-p[i])**2
@@ -49,7 +50,7 @@ class ClusterNewView(TemplateView):
 
 	def cluster(self, vector_4d, distance, time, minimum_cluster):
 		params={"space_eps":distance, "time_eps":time}
-		db=DBSCAN(eps=1,min_samples=minimum_cluster-1,metric=self.custom_metric, metric_params=params).fit_predict(vector_4d)
+		db=DBSCAN(eps=1,min_samples=minimum_cluster-1,metric=ClusterNewView.custom_metric, metric_params=params).fit_predict(vector_4d)
 		
 		unique_labels=set(db)
 
