@@ -32,8 +32,10 @@ class ClusterNewView(TemplateView):
 		time=form.cleaned_data['timeThres']
 		minSize=form.cleaned_data['minSize']
 		visits=pd.DataFrame(self.getvisits()).to_numpy()
-		cluster_list=self.cluster(visits,distance,time,minSize)
-		context['cluster_list']=cluster_list
+		result=self.cluster(visits,distance,time,minSize)
+		context['clustered']=result["clustered"]
+		context['unclustered']=result["unclustered"]
+		context['cluster_list']=result["cluster_list"]
 		return self.render_to_response(context)
 
 	@staticmethod
@@ -82,7 +84,7 @@ class ClusterNewView(TemplateView):
 					print("(x:{}, y:{}, date:{}, day:{}, caseNo:{})".format(pt[0],pt[1], str(dateFrom), pt[2],pt[3]))
 				print()
 				cluster_list.append({'size':size,'visit_list':visit_list})
-		return cluster_list
+		return {"clustered" : total_clusters, "unclustered" : total_noise, "cluster_list" : cluster_list}
 
 	def getvisits(self):
 		visits=Visit.objects.all()
