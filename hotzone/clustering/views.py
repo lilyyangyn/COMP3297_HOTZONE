@@ -58,11 +58,11 @@ class ClusterNewView(TemplateView):
 
 		total_clusters=len(unique_labels) if -1 not in unique_labels else len(unique_labels)
 
-		print("Total cluster:", total_clusters)
+		#print("Total cluster:", total_clusters)
 
 		total_noise=list(db).count(-1)
 
-		print("Total un-clustered:", total_noise)
+		#print("Total un-clustered:", total_noise)
 
 		cluster_list=[]
 		for k in unique_labels:
@@ -71,7 +71,7 @@ class ClusterNewView(TemplateView):
 				cluster_k=vector_4d[labels_k]
 				size=len(cluster_k)
 				
-				print("Cluster",k," size", size)
+				#print("Cluster",k," size", size)
 				visit_list = []
 				for pt in cluster_k:
 					dateFrom = date(2020, 1, 1) + timedelta(pt[2])
@@ -81,8 +81,8 @@ class ClusterNewView(TemplateView):
 						"date" : dateFrom,
 						"caseNo" : pt[3],
 					})
-					print("(x:{}, y:{}, date:{}, day:{}, caseNo:{})".format(pt[0],pt[1], str(dateFrom), pt[2],pt[3]))
-				print()
+					#print("(x:{}, y:{}, date:{}, day:{}, caseNo:{})".format(pt[0],pt[1], str(dateFrom), pt[2],pt[3]))
+				#print()
 				cluster_list.append({'size':size,'visit_list':visit_list})
 		return {"clustered" : total_clusters, "unclustered" : total_noise, "cluster_list" : cluster_list}
 
