@@ -61,11 +61,11 @@
 	</div>
 </form>
 
-{% if clustered or unclustered %}
+{% if clustered %}
 <br><hr><br>
 
 <div class="page-header col-xs-12 col-lg-12" style="margin-top:30px">
-	<h2>Total Clusters: <span style="color:red;">{{ clustered }}</span> &nbsp&nbsp Unclustered Visits: {{ unclustered }}</h2>
+	<h2>Total Clusters: <span style="color:red;">{{ clusters }}</span> &nbsp&nbsp Unclustered Visits: {{ noise }}</h2>
 	<br><br>
 </div>
 
