@@ -20,6 +20,9 @@ class ClusterCreateForm(forms.Form):
 	def clean(self):
 		if not self.is_valid():
 			raise forms.ValidationError(u"You need to fill in all blanks")
+		elif self.cleaned_data['distanceThres']==0:
+			self.add_error('distanceThres',"distanceThres cannot be zero. Please input valid distanceThres.")
+			raise forms.ValidationError(u"distanceThres cannot be zero. Please input valid distanceThres.")
 		elif self.cleaned_data['timeThres']==0:
 			self.add_error('timeThres',"timeThres cannot be zero. Please input valid timeThres.")
 			raise forms.ValidationError(u"timeThres cannot be zero. Please input valid timeThres.")
