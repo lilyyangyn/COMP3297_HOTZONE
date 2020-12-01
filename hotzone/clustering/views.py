@@ -79,7 +79,7 @@ class ClusterNewView(TemplateView):
 						"x" : pt[0],
 						"y" : pt[1],
 						"date" : dateFrom,
-						"caseNo" : pt[3],
+						"caseNo" : int(pt[3]),
 					})
 					#print("(x:{}, y:{}, date:{}, day:{}, caseNo:{})".format(pt[0],pt[1], str(dateFrom), pt[2],pt[3]))
 				#print()
