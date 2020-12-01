@@ -79,7 +79,7 @@ class ClusterNewView(TemplateView):
 						"x" : pt[0],
 						"y" : pt[1],
 						"date" : dateFrom,
-						"caseNo" : int(pt[3]),
+						"caseNo" : pt[3],
 					})
 					#print("(x:{}, y:{}, date:{}, day:{}, caseNo:{})".format(pt[0],pt[1], str(dateFrom), pt[2],pt[3]))
 				#print()
@@ -93,7 +93,7 @@ class ClusterNewView(TemplateView):
 			xcoord=float(visit.location.XCoord)
 			ycoord=float(visit.location.YCoord)
 			day=(visit.dateFrom-date(2020, 1, 1)).days
-			caseno=int(visit.case.caseNumber)
+			caseno=visit.case.caseNumber
 			myArray.append([xcoord,ycoord,day,caseno])
 		return myArray
 
