@@ -34,7 +34,7 @@ class ClusterNewView(TemplateView):
 		minSize=form.cleaned_data['minSize']
 		visits=pd.DataFrame(self.getvisits()).to_numpy()
 		if len(visits) == 0:
-			context['cluster']=0
+			context['clusters']=0
 			context['noise']=0
 			return self.render_to_response(context)
 		result=self.cluster(visits,distance,time,minSize)
