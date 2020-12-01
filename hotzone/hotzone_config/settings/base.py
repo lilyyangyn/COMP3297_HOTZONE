@@ -24,13 +24,12 @@ env.read_env()
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = env('HOTZONE_SECRET_KEY')
-SECRET_KEY = '3!i4qm6vj$-4cbsf^ii27b3_@c-$u3(uayj+rm=&ooefcbdqld'
+SECRET_KEY = env('HOTZONE_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('HOTZONE_DEBUG', default=True)
 
-ALLOWED_HOSTS = ['dry-mesa-46974.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['fast-crag-09011.herokuapp.com', 'dry-mesa-46974.herokuapp.com', 'localhost', '127.0.0.1']
 
 # Add Email smtp configuration
 EMAIL_BACKEND   = 'django.core.mail.backends.smtp.EmailBackend'
