@@ -56,7 +56,7 @@ class ClusterNewView(TemplateView):
 		
 		unique_labels=set(db)
 
-		total_clusters=len(unique_labels) if -1 not in unique_labels else len(unique_labels)
+		total_clusters=len(unique_labels) if -1 not in unique_labels else len(unique_labels)-1
 
 		#print("Total cluster:", total_clusters)
 
