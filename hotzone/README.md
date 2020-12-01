@@ -1,7 +1,8 @@
 # HotZone
 A web for data managemennt, cases clustering and analysis.
 
-Access HotZone with URL: https://dry-mesa-46974.herokuapp.com/
+Access HotZone Release 2 with URL: https://fast-crag-09011.herokuapp.com/
+Access HotZone Release 1 with URL: https://dry-mesa-46974.herokuapp.com/
 
 Superuser: adminse, Password: comp3297
 
